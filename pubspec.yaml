@@ -32,6 +32,8 @@ dependencies:
   flutter:
     sdk: flutter
   get: ^4.6.6
+  permission_handler: ^11.3.1
+  shared_preferences: ^2.3.2
 
 dev_dependencies:
 
