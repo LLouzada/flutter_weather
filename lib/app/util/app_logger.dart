@@ -10,7 +10,7 @@ mixin AppLogger {
     _isLoggerInitialized = true;
   }
 
-  void log(String message) {
+  void logd(String message) {
     if (!_isLoggerInitialized) {
       _initLoggger;
     }

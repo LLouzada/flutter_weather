@@ -4,35 +4,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_weather/app/config/app_constants.dart';
 import 'package:flutter_weather/app/config/app_pages.dart';
-import 'package:flutter_weather/app/config/app_routes.dart';
-import 'package:flutter_weather/presentation/controllers/startup/startup_binding.dart';
-import 'package:flutter_weather/presentation/controllers/startup/startup_controller.dart';
-import 'package:flutter_weather/presentation/pages/home/home_page.dart';
+import 'package:flutter_weather/presentation/controllers/boot/boot_controller.dart';
+import 'package:flutter_weather/presentation/controllers/theme/theme_controller.dart';
 import 'package:get/get.dart';
-import 'package:get/get_navigation/src/root/get_cupertino_app.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 class App extends StatelessWidget {
-  const App({super.key});
+  final ThemeData lightTheme;
+  final ThemeData darkTheme;
+  const App({super.key, required this.lightTheme, required this.darkTheme});
 
   @override
   Widget build(BuildContext context) {
+    final ThemeController themeController = Get.find<ThemeController>();
     FlutterNativeSplash.remove();
-    return Platform.isAndroid
-        ? GetMaterialApp(
-            title: AppConstants.appName,
-            debugShowCheckedModeBanner: false,
-            debugShowMaterialGrid: false,
-            // initialBinding: StartupBinding(),
-            initialRoute: Get.find<StartupController>().getInitialRoute,
-            getPages: AppPages.pages,
-          )
-        : GetCupertinoApp(
-            title: AppConstants.appName,
-            debugShowCheckedModeBanner: false,
-            // initialBinding: StartupBinding(),
-            initialRoute: Get.find<StartupController>().getInitialRoute,
-            getPages: AppPages.pages,
-          );
+
+    return GetMaterialApp(
+      title: AppConstants.appName,
+      debugShowCheckedModeBanner: false,
+      debugShowMaterialGrid: false,
+      theme: lightTheme,
+      darkTheme: darkTheme,
+      themeMode:
+          themeController.isDarkMode.value ? ThemeMode.dark : ThemeMode.light,
+      // todo - add initialBindings
+      // initialBinding: StartupBinding(),
+      initialRoute: Get.find<BootController>().getInitialRoute,
+      getPages: AppPages.pages,
+    );
   }
 }

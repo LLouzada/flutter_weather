@@ -1,4 +1,4 @@
-import 'package:flutter_weather/presentation/controllers/startup/startup_controller.dart';
+import 'package:flutter_weather/presentation/controllers/boot/boot_controller.dart';
 import 'package:get/get.dart';
 
 /// Add controllers to the Getx dependency injection system.
@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 class StartupBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<StartupController>(() => StartupController(), fenix: true);
+    Get.lazyPut<BootController>(() => BootController(), fenix: true);
   }
 }
+
+//todo - move from, here

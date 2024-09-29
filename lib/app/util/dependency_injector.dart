@@ -1,8 +1,10 @@
-import 'package:flutter_weather/presentation/controllers/startup/startup_controller.dart';
+import 'package:flutter_weather/presentation/controllers/boot/boot_controller.dart';
+import 'package:flutter_weather/presentation/controllers/theme/theme_controller.dart';
 import 'package:get/get.dart';
 
 class DependencyInjector {
-  static init() {
-    Get.put(StartupController());
+  static boot() {
+    Get.put(BootController());
+    Get.put(ThemeController());
   }
 }

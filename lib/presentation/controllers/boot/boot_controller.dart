@@ -1,38 +1,43 @@
-import 'package:flutter_weather/app/config/app_constants.dart';
 import 'package:flutter_weather/app/config/app_routes.dart';
 import 'package:flutter_weather/app/util/app_logger.dart';
 import 'package:get/get.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
-// import 'package:permission_handler/permission_handler.dart';
 
-class StartupController extends GetxController with AppLogger {
+class BootController extends GetxController with AppLogger {
   var isAppInitialized = false.obs;
   final _initialRoute = ''.obs;
 
-  //initiaRoute getter
+  Future<bool> boot() async {
+    logd('booting app');
+    await _determineInitialRoute();
+    isAppInitialized.value = true;
+    return true;
+  }
+
+  /// initiaRoute getter
   String get getInitialRoute => _initialRoute.value;
 
-  Future<void> determineInitialRoute() async {
-    log('determining initial route');
+  Future<void> _determineInitialRoute() async {
+    logd('determining initial route');
     bool hasSeenOnboarding = await _checkOnboardingStatus();
 
     bool hasLocationPermission = await _checkLocationPermission();
 
-    log('hasLocationPermission: $hasLocationPermission, hasSeenOnboarding: $hasSeenOnboarding');
+    logd(
+        'hasLocationPermission: $hasLocationPermission, hasSeenOnboarding: $hasSeenOnboarding');
 
     if (!hasSeenOnboarding) {
-      log('initial route: onboarding');
+      logd('initial route: onboarding');
       _initialRoute.value = AppRoutes.onboarding.path;
       return;
     }
 
     if (!hasLocationPermission) {
-      log('initial route: permission');
+      logd('initial route: permission');
       _initialRoute.value = AppRoutes.permission.path;
       return;
     }
 
-    log('initial route: home');
+    logd('initial route: home');
     _initialRoute.value = AppRoutes.home.path;
   }
 

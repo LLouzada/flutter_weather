@@ -1,7 +1,8 @@
+import 'package:flutter_weather/app/util/app_logger.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class LocalStorageService extends GetxService {
+class LocalStorageService extends GetxService with AppLogger {
   SharedPreferences? _sharedPreferences;
 
   Future<LocalStorageService> init() async {
