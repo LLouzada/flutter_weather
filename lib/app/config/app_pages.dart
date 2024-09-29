@@ -8,10 +8,10 @@ class AppPages {
       GetPage(name: '/history', page: () => const HomePage());
 
   static GetPage onboarding =
-      GetPage(name: '/history', page: () => const HomePage());
+      GetPage(name: '/onboarding', page: () => const HomePage());
 
   static GetPage settings =
-      GetPage(name: '/history', page: () => const HomePage());
+      GetPage(name: '/settings', page: () => const HomePage());
 
   static List<GetPage> pages = [
     home,
