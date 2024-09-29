@@ -5,9 +5,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 class LocalStorageService extends GetxService with AppLogger {
   SharedPreferences? _sharedPreferences;
 
-  Future<LocalStorageService> init() async {
+  Future<bool> init() async {
     _sharedPreferences = await SharedPreferences.getInstance();
-    return this;
+    return true;
   }
 
   Future<bool> setString(String key, String value) async {
@@ -16,5 +16,14 @@ class LocalStorageService extends GetxService with AppLogger {
 
   String? getString(String key) {
     return _sharedPreferences!.getString(key);
+  }
+
+  Future<bool> setBool(String key, bool value) async {
+    return await _sharedPreferences!.setBool(key, value);
+  }
+
+  bool? getBool(String key) {
+    logd('shared prefs is null: ${_sharedPreferences == null}');
+    return _sharedPreferences?.getBool(key);
   }
 }

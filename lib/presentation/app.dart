@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_weather/app/config/app_constants.dart';
 import 'package:flutter_weather/app/config/app_pages.dart';
+import 'package:flutter_weather/presentation/controllers/boot/boot_binding.dart';
 import 'package:flutter_weather/presentation/controllers/boot/boot_controller.dart';
 import 'package:flutter_weather/presentation/controllers/theme/theme_controller.dart';
 import 'package:get/get.dart';
@@ -26,8 +27,7 @@ class App extends StatelessWidget {
       darkTheme: darkTheme,
       themeMode:
           themeController.isDarkMode.value ? ThemeMode.dark : ThemeMode.light,
-      // todo - add initialBindings
-      // initialBinding: StartupBinding(),
+      initialBinding: BootBinding(),
       initialRoute: Get.find<BootController>().getInitialRoute,
       getPages: AppPages.pages,
     );

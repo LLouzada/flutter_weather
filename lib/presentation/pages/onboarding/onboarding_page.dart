@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_onboarding_slider/flutter_onboarding_slider.dart';
+import 'package:flutter_weather/presentation/controllers/onboarding/onboarding_controller.dart';
+import 'package:get/get.dart';
 
 class OnboardingPage extends StatelessWidget {
   const OnboardingPage({super.key});
@@ -13,16 +15,23 @@ class OnboardingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
+    final OnboardingController obController = Get.find<OnboardingController>();
     return OnBoardingSlider(
         totalPage: 3,
         controllerColor: Theme.of(context).colorScheme.primary,
         headerBackgroundColor: Theme.of(context).colorScheme.primary,
         imageHorizontalOffset: ((size.width - backgroundWidth) / 2),
         finishButtonText: 'Vamos lá!',
+        finishButtonStyle: FinishButtonStyle(
+            backgroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            )),
+        onFinish: () => {obController.onFinish()},
         skipTextButton:
             Text('Pular', style: Theme.of(context).textTheme.titleLarge),
         trailing: Text(
-          'Começar',
+          '',
           style: Theme.of(context).textTheme.titleLarge,
         ),
         background: [
