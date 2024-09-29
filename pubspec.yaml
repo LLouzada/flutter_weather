@@ -2,7 +2,7 @@ name: flutter_weather
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -31,21 +31,34 @@ dependencies:
   cupertino_icons: ^1.0.8
   flutter:
     sdk: flutter
-  flutter_launcher_icons: ^0.14.1
+  flutter_native_splash: ^2.4.1
   get: ^4.6.6
   permission_handler: ^11.3.1
   shared_preferences: ^2.3.2
 
 dev_dependencies:
+  flutter_launcher_icons: ^0.14.1
   flutter_lints: ^4.0.0
   flutter_test:
     sdk: flutter
+
+flutter_native_splash:
+  android: true
+  ios: true
+  web: false
+  color: "#FEFEFE" 
+  color_dark: "#000000" 
+  image: assets/images/app_logo.png
+  android_12: 
+    image: assets/images/app_logo.png
+    color: "#FEFEFE"  
+    color_dark: "#000000"
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 # The following section is specific to Flutter packages.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
