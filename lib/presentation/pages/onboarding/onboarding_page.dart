@@ -14,11 +14,11 @@ class OnboardingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
+    final Size size = MediaQuery.of(Get.context!).size;
     final OnboardingController obController = Get.find<OnboardingController>();
     return OnBoardingSlider(
         totalPage: 3,
-        controllerColor: Theme.of(context).colorScheme.primary,
+        controllerColor: Theme.of(Get.context!).colorScheme.primary,
         headerBackgroundColor: Theme.of(context).colorScheme.primary,
         imageHorizontalOffset: ((size.width - backgroundWidth) / 2),
         finishButtonText: 'Vamos lá!',
@@ -29,10 +29,10 @@ class OnboardingPage extends StatelessWidget {
             )),
         onFinish: () => {obController.onFinish()},
         skipTextButton:
-            Text('Pular', style: Theme.of(context).textTheme.titleLarge),
+            Text('Pular', style: Theme.of(Get.context!).textTheme.titleLarge),
         trailing: Text(
           '',
-          style: Theme.of(context).textTheme.titleLarge,
+          style: Theme.of(Get.context!).textTheme.titleLarge,
         ),
         background: [
           Image.asset(
@@ -58,7 +58,7 @@ class OnboardingPage extends StatelessWidget {
                   ),
                   Text(
                     'Acompanhe a Previsão do Tempo',
-                    style: Theme.of(context).textTheme.titleLarge,
+                    style: Theme.of(Get.context!).textTheme.titleLarge,
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(
@@ -66,7 +66,7 @@ class OnboardingPage extends StatelessWidget {
                   ),
                   Text(
                       'Acompanhe a previsão do tempo em qualquer lugar do mundo.',
-                      style: Theme.of(context).textTheme.titleSmall,
+                      style: Theme.of(Get.context!).textTheme.titleSmall,
                       textAlign: TextAlign.center),
                   SizedBox(
                     height: textSpace * 2,
@@ -92,7 +92,7 @@ class OnboardingPage extends StatelessWidget {
                   ),
                   Text(
                       'Mesmo sem conexão com a internet, você pode acompanhar a previsão do tempo a partir de dados armazenados localmente.',
-                      style: Theme.of(context).textTheme.titleSmall,
+                      style: Theme.of(Get.context!).textTheme.titleSmall,
                       textAlign: TextAlign.center),
                   SizedBox(
                     height: textSpace * 2,
@@ -110,14 +110,14 @@ class OnboardingPage extends StatelessWidget {
                   ),
                   Text(
                     '',
-                    style: Theme.of(context).textTheme.titleLarge,
+                    style: Theme.of(Get.context!).textTheme.titleLarge,
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(
                     height: textSpace,
                   ),
                   Text('',
-                      style: Theme.of(context).textTheme.titleSmall,
+                      style: Theme.of(Get.context!).textTheme.titleSmall,
                       textAlign: TextAlign.center),
                   SizedBox(
                     height: textSpace * 2,

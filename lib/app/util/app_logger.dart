@@ -3,7 +3,6 @@ import 'package:flutter_weather/app/config/app_constants.dart';
 
 mixin AppLogger {
   final _isDebugMode = AppConstants.isDebugMode;
-  var _isLoggerInitialized = false;
 
   // Códigos de escape ANSI
   static const String _reset = '\x1B[0m';
@@ -11,15 +10,8 @@ mixin AppLogger {
   // static const String _red = '\x1B[31m';
   // static const String _yellow = '\x1B[33m';
 
-  void _initLoggger() {
-    _defineDebugPrint();
-    _isLoggerInitialized = true;
-  }
-
   void logd(String message) {
-    if (!_isLoggerInitialized) {
-      _initLoggger();
-    }
+    _defineDebugPrint();
     debugPrint(_formatMessage(message, color: _green));
   }
 

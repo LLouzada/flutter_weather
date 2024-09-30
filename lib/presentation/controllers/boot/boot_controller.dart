@@ -45,7 +45,7 @@ class BootController extends GetxController with AppLogger {
   // Função para verificar o status do onboarding
   Future<bool> _checkOnboardingStatus() async {
     final bool? hasSeenOnboarding =
-        _storage!.getBool(AppConstants.onboardingStoreKey);
+        _storage!.getBool(AppConstants.storeKeyOnboarding);
     logd('hasSeenOnboarding: $hasSeenOnboarding');
     return hasSeenOnboarding ?? false;
   }

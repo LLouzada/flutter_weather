@@ -11,8 +11,8 @@ class AppPages {
   static GetPage onboarding = GetPage(
       name: AppRoutes.onboarding.path, page: () => const OnboardingPage());
 
-  static GetPage permission = GetPage(
-      name: AppRoutes.permission.path, page: () => const PermissionPage());
+  static GetPage permission =
+      GetPage(name: AppRoutes.permission.path, page: () => PermissionPage());
 
   static GetPage history =
       GetPage(name: AppRoutes.history.path, page: () => const HomePage());

@@ -5,5 +5,5 @@ class AppConstants {
 
   static const bool isDebugMode = true;
 
-  static const String onboardingStoreKey = 'onboarding_complete';
+  static const String storeKeyOnboarding = 'onboarding_complete';
 }

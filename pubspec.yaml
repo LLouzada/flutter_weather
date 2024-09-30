@@ -72,6 +72,7 @@ flutter:
     - assets/images/onboarding_sun.png
     - assets/images/onboarding_rain.png
     - assets/images/onboarding_wind.png
+    - assets/images/location.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
   # For details regarding adding assets from package dependencies, see
