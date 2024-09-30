@@ -13,6 +13,7 @@ class DependencyInjector {
       return service;
     });
 
+    // Controllers necessário no boot
     Get.put(BootController());
     Get.put(PermissionController());
     Get.put(ThemeController());

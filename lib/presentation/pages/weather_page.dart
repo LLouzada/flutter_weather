@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_weather/app/config/app_constants.dart';
+import 'package:flutter_weather/presentation/controllers/location_controller.dart';
 import 'package:flutter_weather/presentation/controllers/theme_controller.dart';
 import 'package:get/get.dart';
 
@@ -9,6 +10,8 @@ class WeatherPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeController themeController = Get.find<ThemeController>();
+    final LocationController locationController =
+        Get.find<LocationController>();
 
     return Scaffold(
       appBar: AppBar(
@@ -30,23 +33,45 @@ class WeatherPage extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(16.0),
               margin: const EdgeInsets.all(8.0),
+              height: 200,
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: Theme.of(Get.context!).colorScheme.primary,
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: const Column(
-                children: [
-                  Text(
-                    'Temperatura Hoje',
-                    style: TextStyle(fontSize: 24, color: Colors.white),
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    '25°C',
-                    style: TextStyle(fontSize: 48, color: Colors.white),
-                  ),
-                ],
-              ),
+              child: Obx(() {
+                if (locationController.isLoading.value) {
+                  return Center(
+                    child: CircularProgressIndicator(
+                      color: Theme.of(Get.context!).colorScheme.onPrimary,
+                    ),
+                  );
+                }
+
+                if (locationController.errorMessage.isNotEmpty) {
+                  return Text(
+                      'Erro: ${locationController.errorMessage.value}'); // Mostra erro, se houver
+                }
+
+                if (locationController.location.value != null) {
+                  final location = locationController.location.value!;
+                  return Text(
+                      'Latitude: ${location.latitude}, Longitude: ${location.longitude}');
+                }
+
+                return const Column(
+                  children: [
+                    Text(
+                      'Temperatura Hoje',
+                      style: TextStyle(fontSize: 24, color: Colors.white),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      '25°C',
+                      style: TextStyle(fontSize: 48, color: Colors.white),
+                    ),
+                  ],
+                );
+              }),
             ),
             Container(
               height: 150,
