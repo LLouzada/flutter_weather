@@ -5,15 +5,14 @@ import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class PermissionController extends GetxController with AppLogger {
-  void handlePermission() async {
+  Future<bool> hasLocationPermission() async {
+    return await Permission.location.status.isGranted;
+  }
+
+  void handleLocastionPermission() async {
     await Permission.location.onDeniedCallback(() {
-      Get.snackbar(
-        'Permissão Negada',
-        'permita o acesso à sua localização para obter previsões de clima mais precisas.',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Theme.of(Get.context!).colorScheme.secondary,
-        colorText: Theme.of(Get.context!).colorScheme.onSecondary,
-      );
+      logd('Permission denied');
+      _showlocationPermissionSnackBar();
     }).onGrantedCallback(() {
       logd('Permission granted');
       Get.toNamed(AppRoutes.home.path);
@@ -27,5 +26,15 @@ class PermissionController extends GetxController with AppLogger {
     }).onProvisionalCallback(() {
       logd('Permission provisional');
     }).request();
+  }
+
+  _showlocationPermissionSnackBar() {
+    Get.snackbar(
+      'Permissão Negada',
+      'Permita o acesso à sua localização para obter previsões de clima mais precisas.',
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: Theme.of(Get.context!).colorScheme.secondary,
+      colorText: Theme.of(Get.context!).colorScheme.onSecondary,
+    );
   }
 }

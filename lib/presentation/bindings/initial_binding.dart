@@ -1,5 +1,4 @@
 import 'package:flutter_weather/presentation/controllers/onboarding_controller.dart';
-import 'package:flutter_weather/presentation/controllers/permission_controller.dart';
 import 'package:get/get.dart';
 
 /// Add controllers to the Getx dependency injection system.
@@ -8,8 +7,6 @@ class InitialBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<OnboardingController>(() => OnboardingController(),
-        fenix: true);
-    Get.lazyPut<PermissionController>(() => PermissionController(),
         fenix: true);
   }
 }

@@ -2,7 +2,9 @@ import 'package:flutter_weather/app/config/app_constants.dart';
 import 'package:flutter_weather/app/config/app_routes.dart';
 import 'package:flutter_weather/app/services/local_storage.dart';
 import 'package:flutter_weather/app/util/app_logger.dart';
+import 'package:flutter_weather/presentation/controllers/permission_controller.dart';
 import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class BootController extends GetxController with AppLogger {
   var isAppInitialized = false.obs;
@@ -42,7 +44,7 @@ class BootController extends GetxController with AppLogger {
     _initialRoute.value = AppRoutes.home.path;
   }
 
-  // Função para verificar o status do onboarding
+  // Metodo private para verificar se o usuário já viu o onboarding
   Future<bool> _checkOnboardingStatus() async {
     final bool? hasSeenOnboarding =
         _storage!.getBool(AppConstants.storeKeyOnboarding);
@@ -52,9 +54,9 @@ class BootController extends GetxController with AppLogger {
 
   // Função para verificar permissão de localização
   Future<bool> _checkLocationPermission() async {
-    // PermissionStatus status = await Permission.location.status;
-    // return status.isGranted;
-    await Future.delayed(const Duration(seconds: 2));
-    return false;
+    final bool hasLocationPermission =
+        await Get.find<PermissionController>().hasLocationPermission();
+    logd('hasLocationPermission: $hasLocationPermission');
+    return hasLocationPermission;
   }
 }

@@ -28,8 +28,12 @@ class OnboardingPage extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
             )),
         onFinish: () => {obController.onFinish()},
-        skipTextButton:
-            Text('Pular', style: Theme.of(Get.context!).textTheme.titleLarge),
+        skipTextButton: Text(
+          'Pular',
+          style: Theme.of(Get.context!).textTheme.titleLarge?.copyWith(
+                color: Theme.of(Get.context!).colorScheme.onPrimary,
+              ),
+        ),
         trailing: Text(
           '',
           style: Theme.of(Get.context!).textTheme.titleLarge,
