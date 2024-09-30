@@ -4,7 +4,6 @@ import 'package:flutter_weather/app/services/local_storage.dart';
 import 'package:flutter_weather/app/util/app_logger.dart';
 import 'package:flutter_weather/presentation/controllers/permission_controller.dart';
 import 'package:get/get.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class BootController extends GetxController with AppLogger {
   var isAppInitialized = false.obs;

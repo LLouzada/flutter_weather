@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_weather/app/config/app_constants.dart';
 import 'package:flutter_weather/presentation/controllers/theme_controller.dart';
 import 'package:get/get.dart';
 
@@ -11,7 +12,8 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Weather App'),
+        title: const Text(AppConstants.appName),
+        centerTitle: true,
         actions: [
           IconButton(
             icon: const Icon(Icons.brightness_6),

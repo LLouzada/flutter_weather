@@ -15,19 +15,15 @@ void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
-  DependencyInjector.boot();
-  bool hasInitializedLocalStorage =
-      await Get.find<LocalStorageService>().init();
-
-  if (!hasInitializedLocalStorage) {
-    throw Exception('Erro ao iniciar o app');
-  }
+  // Aguarda a inicialização do DependencyInjector
+  await DependencyInjector.boot();
 
   bool hasBooted = await Get.find<BootController>().boot();
   if (!hasBooted) {
     throw Exception('Erro ao iniciar o app');
   }
 
+  // Inicia o ThemeController para carregar os temas
   final ThemeController themeController = Get.find<ThemeController>();
   final ThemeData lightTheme = await themeController.buildLightTheme();
   final ThemeData darkTheme = await themeController.buildDarkTheme();

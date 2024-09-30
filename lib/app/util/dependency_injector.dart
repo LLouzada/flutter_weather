@@ -5,10 +5,16 @@ import 'package:flutter_weather/presentation/controllers/theme_controller.dart';
 import 'package:get/get.dart';
 
 class DependencyInjector {
-  static boot() {
+  static Future<void> boot() async {
+    // Inicializa o LocalStorageService de forma assíncrona
+    await Get.putAsync<LocalStorageService>(() async {
+      final service = LocalStorageService();
+      await service.init();
+      return service;
+    });
+
     Get.put(BootController());
-    Get.put(ThemeController());
-    Get.put(LocalStorageService());
     Get.put(PermissionController());
+    Get.put(ThemeController());
   }
 }

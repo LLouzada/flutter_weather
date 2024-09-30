@@ -15,10 +15,10 @@ class PermissionController extends GetxController with AppLogger {
       _showlocationPermissionSnackBar();
     }).onGrantedCallback(() {
       logd('Permission granted');
-      Get.toNamed(AppRoutes.home.path);
+      Get.offAllNamed(AppRoutes.home.path);
     }).onPermanentlyDeniedCallback(() {
       logd('permanently denied');
-      Get.toNamed(AppRoutes.home.path);
+      Get.offAllNamed(AppRoutes.permission.path);
     }).onRestrictedCallback(() {
       logd('Permission restricted');
     }).onLimitedCallback(() {
