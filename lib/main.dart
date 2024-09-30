@@ -3,10 +3,10 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_weather/app/services/local_storage.dart';
 import 'package:flutter_weather/app/util/dependency_injector.dart';
 import 'package:flutter_weather/presentation/app.dart';
-import 'package:flutter_weather/presentation/controllers/theme/theme_controller.dart';
+import 'package:flutter_weather/presentation/controllers/theme_controller.dart';
 import 'package:get/get.dart';
 
-import 'presentation/controllers/boot/boot_controller.dart';
+import 'presentation/controllers/boot_controller.dart';
 
 // todo - GPS + tela de permissão
 // todo - principal

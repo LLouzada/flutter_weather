@@ -1,7 +1,7 @@
 import 'package:flutter_weather/app/config/app_routes.dart';
-import 'package:flutter_weather/presentation/pages/home/home_page.dart';
-import 'package:flutter_weather/presentation/pages/onboarding/onboarding_page.dart';
-import 'package:flutter_weather/presentation/pages/permission/permission_page.dart';
+import 'package:flutter_weather/presentation/pages/home_page.dart';
+import 'package:flutter_weather/presentation/pages/onboarding_page.dart';
+import 'package:flutter_weather/presentation/pages/permission_page.dart';
 import 'package:get/get.dart';
 
 class AppPages {
@@ -11,8 +11,8 @@ class AppPages {
   static GetPage onboarding = GetPage(
       name: AppRoutes.onboarding.path, page: () => const OnboardingPage());
 
-  static GetPage permission =
-      GetPage(name: AppRoutes.permission.path, page: () => PermissionPage());
+  static GetPage permission = GetPage(
+      name: AppRoutes.permission.path, page: () => const PermissionPage());
 
   static GetPage history =
       GetPage(name: AppRoutes.history.path, page: () => const HomePage());

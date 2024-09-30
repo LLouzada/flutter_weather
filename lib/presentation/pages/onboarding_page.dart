@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_onboarding_slider/flutter_onboarding_slider.dart';
-import 'package:flutter_weather/presentation/controllers/onboarding/onboarding_controller.dart';
+import 'package:flutter_weather/presentation/controllers/onboarding_controller.dart';
 import 'package:get/get.dart';
 
 class OnboardingPage extends StatelessWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_weather/presentation/controllers/permission/permission_controller.dart';
+import 'package:flutter_weather/presentation/controllers/permission_controller.dart';
 import 'package:get/get.dart';
 
 class PermissionPage extends StatelessWidget {
