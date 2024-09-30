@@ -1,7 +1,4 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_weather/app/config/app_constants.dart';
 import 'package:flutter_weather/app/config/app_pages.dart';
 import 'package:flutter_weather/presentation/bindings/initial_binding.dart';
@@ -17,7 +14,6 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeController themeController = Get.find<ThemeController>();
-    FlutterNativeSplash.remove();
 
     return GetMaterialApp(
       title: AppConstants.appName,
