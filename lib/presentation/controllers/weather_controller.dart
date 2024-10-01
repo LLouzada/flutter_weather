@@ -3,13 +3,16 @@ import 'package:flutter_weather/data/models/city_model.dart';
 import 'package:flutter_weather/data/models/location_model.dart';
 import 'package:flutter_weather/domain/usecases/fetch_city_use_case.dart';
 import 'package:flutter_weather/domain/usecases/fetch_location_use_case.dart';
+import 'package:flutter_weather/domain/usecases/fetch_weather_use_case.dart';
 import 'package:get/get.dart';
 
 class WeatherController extends GetxController with AppLogger {
   final FetchLocationUseCase fetchLocationUseCase;
   final FetchCityUseCase fetchCityUseCase;
+  final FetchWeatherUseCase fetchWeatherUseCase;
 
-  WeatherController(this.fetchLocationUseCase, this.fetchCityUseCase);
+  WeatherController(this.fetchLocationUseCase, this.fetchCityUseCase,
+      this.fetchWeatherUseCase);
 
   var locationModel = Rxn<LocationModel>();
   var cityModel = Rxn<CityModel>();
