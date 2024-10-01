@@ -28,8 +28,8 @@ class WeatherController extends GetxController with AppLogger {
   @override
   void onInit() {
     super.onInit();
-    isCityLoading = false.obs;
-    isWeatherLoading = false.obs;
+    isCityLoading = true.obs;
+    isWeatherLoading = true.obs;
     fetchLocation();
   }
 

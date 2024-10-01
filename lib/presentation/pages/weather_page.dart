@@ -38,13 +38,17 @@ class WeatherPage extends StatelessWidget {
                   color: Theme.of(Get.context!).colorScheme.primary,
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Column(
-                  children: [
-                    Obx(() {
-                      if (weatherController.isWeatherLoading.value) {
-                        return const CircularProgressIndicator();
-                      }
-                      return Row(
+                child: Obx(
+                  () {
+                    if (weatherController.isWeatherLoading.value &&
+                        weatherController.isCityLoading.value) {
+                      return Center(
+                          child: CircularProgressIndicator(
+                        color: Theme.of(Get.context!).colorScheme.onPrimary,
+                      ));
+                    }
+                    return Column(children: [
+                      Row(
                         children: [
                           Text(
                             weatherController.cityModel.value?.name ?? '',
@@ -67,34 +71,24 @@ class WeatherPage extends StatelessWidget {
                             ),
                           )
                         ],
-                      );
-                    }),
-                    Obx(() {
-                      if (weatherController.isWeatherLoading.value) {
-                        return const CircularProgressIndicator();
-                      }
-                      return Text(
+                      ),
+                      Text(
                         '${weatherController.weatherModel.value?.day1}°C',
                         style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
-                      );
-                    }),
-                    Obx(() {
-                      if (weatherController.isWeatherLoading.value) {
-                        return const CircularProgressIndicator();
-                      }
-                      return Text(
+                      ),
+                      Text(
                         weatherController.weatherModel.value?.day1MaxTemperature
                                 .toString() ??
                             '',
                         style: const TextStyle(
                           fontSize: 18,
                         ),
-                      );
-                    }),
-                  ],
+                      )
+                    ]);
+                  },
                 )),
             Container(
               height: 150,
