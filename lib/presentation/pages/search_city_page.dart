@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_weather/data/models/location_model.dart';
 import 'package:flutter_weather/presentation/controllers/city_controller.dart';
+import 'package:flutter_weather/presentation/controllers/weather_controller.dart';
 import 'package:flutter_weather/presentation/widgets/app_loader.dart';
 import 'package:get/get.dart';
 
@@ -11,6 +13,7 @@ class SearchCityPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final CityController cityController = Get.find<CityController>();
+    final WeatherController weatherController = Get.find<WeatherController>();
     Timer? debounce;
 
     return Scaffold(
@@ -62,8 +65,13 @@ class SearchCityPage extends StatelessWidget {
                       title: Text(city.name),
                       subtitle: Text(
                           'Latitude: ${city.latitude.substring(0, 9)}, Longitude: ${city.longitude.substring(0, 9)}'),
-                      onTap: () {
-                        //todo - action
+                      onTap: () async {
+                        await weatherController.getWeatherByCitySearch(
+                            LocationModel(
+                                latitude: double.tryParse(city.latitude) ?? 0.0,
+                                longitude:
+                                    double.tryParse(city.longitude) ?? 0.0));
+                        // Get.back();
                       },
                     );
                   },

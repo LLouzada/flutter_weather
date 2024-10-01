@@ -1,3 +1,4 @@
+import 'package:flutter_weather/app/config/app_routes.dart';
 import 'package:flutter_weather/app/util/app_logger.dart';
 import 'package:flutter_weather/data/models/city_model.dart';
 import 'package:flutter_weather/data/models/location_model.dart';
@@ -45,11 +46,11 @@ class WeatherController extends GetxController with AppLogger {
       }
       await fetchCityByLocation(locationModel.value!);
       await fetchWeatherByLocation(locationModel.value!);
+      isCityLoading.value = false;
+      isWeatherLoading.value = false;
     } catch (e) {
       logE('Error fetching location: $e');
       locationErrorMessage.value = 'Não foi possível obter a localização.';
-      isCityLoading.value = false;
-      isWeatherLoading.value = false;
     }
   }
 
@@ -86,10 +87,19 @@ class WeatherController extends GetxController with AppLogger {
     } catch (e) {
       logE('Error fetching weather: $e');
       weatherErrorMessage.value = 'Erro ao obter a previsão do tempo.';
-    } finally {
-      isWeatherLoading.value = false;
-      isCityLoading.value = false;
     }
+  }
+
+  Future<void> getWeatherByCitySearch(LocationModel location) async {
+    isWeatherLoading.value = true;
+    isCityLoading.value = true;
+
+    Get.toNamed(AppRoutes.home.path);
+    await fetchCityByLocation(location);
+    await fetchWeatherByLocation(location);
+
+    isCityLoading.value = false;
+    isWeatherLoading.value = false;
   }
 
   void _setDefaultCity() {
