@@ -9,7 +9,25 @@ class PermissionController extends GetxController with AppLogger {
     return await Permission.location.status.isGranted;
   }
 
+  Future<bool> hasnotLocationPermissionService() async {
+    return await Permission.location.serviceStatus.isEnabled == false;
+  }
+
   void handleLocastionPermission() async {
+    if (await (hasnotLocationPermissionService())) {
+      Get.snackbar('O serviço de localização está desativado.',
+          'Por favor, ative o serviço de localização para continuar.',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Theme.of(Get.context!).colorScheme.secondary,
+          colorText: Colors.white,
+          duration: const Duration(seconds: 5),
+          icon: Icon(
+            Icons.location_on_outlined,
+            color: Theme.of(Get.context!).colorScheme.onSecondary,
+          ));
+      return;
+    }
+
     await Permission.location.onDeniedCallback(() {
       logD('Permission denied');
       _showlocationPermissionSnackBar();
