@@ -40,7 +40,6 @@ mixin AppLogger {
   }
 
   String _formatMessage(String? message, {String? color}) {
-    // Formata a mensagem com o nome do app e a data/hora atual
-    return "$color[${AppConstants.appName} - ${DateTime.now()}]: $message$_reset";
+    return "$color[${AppConstants.appName} - ${DateTime.now()}]: $message$_reset \n";
   }
 }

@@ -5,7 +5,6 @@ import 'package:flutter_weather/domain/repositories/weather_repository.dart';
 class WeatherRepositoryImpl with AppLogger implements WeatherRepository {
   @override
   Future<WeatherModel> fetchWeather() {
-    throw UnimplementedError();
+    return Future.value(WeatherModel.empty());
   }
-  // final WeatherApiService _weatherApiService;
 }

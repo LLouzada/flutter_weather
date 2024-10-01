@@ -5,8 +5,6 @@ class AppConstants {
 
   static const bool isDebugMode = true;
 
-  static const String weatherDefaultCity = 'São Paulo';
-
   // Shared Preferences Keys
   static const String storeKeyOnboarding = 'onboarding_complete';
 

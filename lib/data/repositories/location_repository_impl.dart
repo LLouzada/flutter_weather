@@ -41,7 +41,7 @@ class LocationRepositoryImpl with AppLogger implements LocationRepository {
   void _locationExceptionSnackbar() {
     Get.snackbar(
       'Permissão de localização negada ou serviços de localização desativados.',
-      'Considere permitir acesso à localização ou ative os serviços de localização no dispositivo.'
+      'Considere permitir acesso à localização ou ativar os serviços de localização'
           'para uma experiência mais completa.',
       snackPosition: SnackPosition.BOTTOM,
       duration: const Duration(seconds: 5),

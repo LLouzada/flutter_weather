@@ -12,4 +12,12 @@ class CityModel {
       country: json['country'] ?? '',
     );
   }
+
+  factory CityModel.empty() {
+    return CityModel(name: '', state: '', country: '');
+  }
+
+  isEmpty() {
+    return name == '' && state == '' && country == '';
+  }
 }

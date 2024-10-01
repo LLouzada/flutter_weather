@@ -14,13 +14,11 @@ class CityRepositoryImpl with AppLogger implements CityRepository {
       'Fetching city from location: ${location.latitude}, ${location.longitude}, response: $response',
     );
 
-    // Fazendo o parsing da resposta
     if (response != null && response is Map<String, dynamic>) {
       final address = response['address'];
-      return CityModel.fromJson(address); // Usando o factory constructor
+      return CityModel.fromJson(address); 
     }
 
-    //todo - usar cidade default / ultimo histórico
-    throw Exception('City not found from location');
+    return CityModel.empty();
   }
 }

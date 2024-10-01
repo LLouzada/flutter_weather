@@ -1,6 +1,7 @@
 import 'package:flutter_weather/app/util/app_logger.dart';
 import 'package:flutter_weather/data/models/city_model.dart';
 import 'package:flutter_weather/data/models/location_model.dart';
+import 'package:flutter_weather/data/models/weather_model.dart';
 import 'package:flutter_weather/domain/usecases/fetch_city_use_case.dart';
 import 'package:flutter_weather/domain/usecases/fetch_location_use_case.dart';
 import 'package:flutter_weather/domain/usecases/fetch_weather_use_case.dart';
@@ -16,46 +17,91 @@ class WeatherController extends GetxController with AppLogger {
 
   var locationModel = Rxn<LocationModel>();
   var cityModel = Rxn<CityModel>();
+  var weatherModel = Rxn<WeatherModel>();
 
-  var isLoading = false.obs;
-  var errorMessage = ''.obs;
+  var isCityLoading = false.obs;
+  var isWeatherLoading = false.obs;
+  var locationErrorMessage = ''.obs;
+  var cityErrorMessage = ''.obs;
+  var weatherErrorMessage = ''.obs;
 
   @override
   void onInit() {
     super.onInit();
+    isCityLoading = false.obs;
+    isWeatherLoading = false.obs;
     fetchLocation();
   }
 
   Future<void> fetchLocation() async {
     try {
-      isLoading.value = true;
       final fetchedLocation = await fetchLocationUseCase.execute();
       logD(
           'Fetched location: ${fetchedLocation.latitude}, ${fetchedLocation.longitude}');
       locationModel.value = fetchedLocation;
 
-      if (locationModel.value != null) {
-        await fetchCityByLocation(locationModel.value!);
-      } //todo - usar cidade default / ultimo histórico
+      if (locationModel.value == null || locationModel.value?.isEmpty()) {
+        _setDefaultLatLong();
+      }
+      await fetchWeatherByLocation(locationModel.value!);
+      await fetchCityByLocation(locationModel.value!);
     } catch (e) {
       logE('Error fetching location: $e');
-      errorMessage.value = 'Location not available.';
-      isLoading.value = false;
+      locationErrorMessage.value = 'Não foi possível obter a localização.';
+      isCityLoading.value = false;
+      isWeatherLoading.value = false;
     }
   }
 
   Future<void> fetchCityByLocation(LocationModel location) async {
     try {
-      isLoading.value = true;
+      isCityLoading.value = true;
       final fetchedCityData = await fetchCityUseCase.execute(location);
       logD(
           'Fetched City Data: ${fetchedCityData.name}, ${fetchedCityData.state}, ${fetchedCityData.country}');
       cityModel.value = fetchedCityData;
+
+      if (cityModel.value == null || cityModel.value?.isEmpty()) {
+        _setDefaultCity();
+      }
     } catch (e) {
       logE('Error fetching city: $e');
-      errorMessage.value = 'City not available.';
+      cityErrorMessage.value = 'City not available.';
     } finally {
-      isLoading.value = false;
+      isCityLoading.value = false;
     }
+  }
+
+  Future<void> fetchWeatherByLocation(LocationModel location) async {
+    try {
+      isWeatherLoading.value = true;
+      final fetchedWeatherData = await fetchWeatherUseCase.execute(location);
+      logD(
+          'Fetched Weather Data: ${fetchedWeatherData.day1}, ${fetchedWeatherData.day1MinTemperature}, ${fetchedWeatherData.day1MaxTemperature} \n'
+          '${fetchedWeatherData.day1Precipitation}, ${fetchedWeatherData.day1Humidity}');
+      weatherModel.value = fetchedWeatherData;
+    } catch (e) {
+      logE('Error fetching weather: $e');
+      weatherErrorMessage.value = 'Erro ao obter a previsão do tempo.';
+    } finally {
+      isWeatherLoading.value = false;
+    }
+  }
+
+  void _setDefaultCity() {
+    //todo - buscar no banco de dados antes de setar default
+    logE('Setting default city');
+    cityModel.value = CityModel(
+      name: 'São Paulo',
+      state: 'SP',
+      country: 'BR',
+    );
+  }
+
+  void _setDefaultLatLong() {
+    //todo - buscar no banco de dados antes de setar default
+    logE('Setting default lat and long');
+    locationModel.value =
+        LocationModel(latitude: -23.5558, longitude: -46.6396);
   }
 }

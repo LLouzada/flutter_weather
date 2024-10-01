@@ -38,7 +38,7 @@ class WeatherPage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Obx(() {
-                if (weatherController.isLoading.value) {
+                if (weatherController.isCityLoading.value) {
                   return Center(
                     child: CircularProgressIndicator(
                       color: Theme.of(Get.context!).colorScheme.onPrimary,
@@ -46,10 +46,10 @@ class WeatherPage extends StatelessWidget {
                   );
                 }
 
-                if (weatherController.errorMessage.isNotEmpty) {
+                if (weatherController.locationErrorMessage.isNotEmpty) {
                   return Center(
                     child: Text(
-                        'Erro ao buscar localização: ${weatherController.errorMessage.value} \n'
+                        'Erro ao buscar localização: ${weatherController.locationErrorMessage.value} \n'
                         'Você pode tentar novamente ou pesquisar uma cidade.'),
                   ); // Mostra erro, se houver
                 }
