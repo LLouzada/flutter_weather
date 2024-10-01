@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_weather/presentation/controllers/city_controller.dart';
+import 'package:flutter_weather/presentation/widgets/app_loader.dart';
 import 'package:get/get.dart';
 
 class SearchCityPage extends StatelessWidget {
@@ -24,7 +25,7 @@ class SearchCityPage extends StatelessWidget {
               onChanged: (value) {
                 if (debounce?.isActive ?? false) debounce?.cancel();
 
-                debounce = Timer(const Duration(milliseconds: 500), () {
+                debounce = Timer(const Duration(milliseconds: 800), () {
                   if (value.isNotEmpty) {
                     cityController.searchCity(value);
                   } else {
@@ -38,10 +39,14 @@ class SearchCityPage extends StatelessWidget {
                 suffixIcon: Icon(Icons.search),
               ),
             ),
-            const SizedBox(height: 16),
+            Obx(() {
+              return cityController.cities.isNotEmpty
+                  ? const SizedBox.shrink()
+                  : const SizedBox(height: 60);
+            }),
             Obx(() {
               if (cityController.isLoading.value) {
-                return const Center(child: CircularProgressIndicator());
+                return showLoader();
               }
 
               if (cityController.errorMessage.isNotEmpty) {
@@ -56,10 +61,9 @@ class SearchCityPage extends StatelessWidget {
                     return ListTile(
                       title: Text(city.name),
                       subtitle: Text(
-                          //diminuir a quantidade de caracteres de latitude e longitude
                           'Latitude: ${city.latitude.substring(0, 9)}, Longitude: ${city.longitude.substring(0, 9)}'),
                       onTap: () {
-                        // Ação ao clicar na cidade (ex: navegar para detalhes)
+                        //todo - action
                       },
                     );
                   },

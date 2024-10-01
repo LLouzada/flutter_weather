@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_weather/data/models/weather_model.dart';
 import 'package:flutter_weather/presentation/controllers/weather_controller.dart';
+import 'package:flutter_weather/presentation/widgets/app_loader.dart';
 import 'package:get/get.dart';
 import 'package:weather_icons/weather_icons.dart';
 
 class TodayWeatherContainer extends StatelessWidget {
+  final WeatherController weatherController;
+
   const TodayWeatherContainer({
     super.key,
     required this.weatherController,
   });
-
-  final WeatherController weatherController;
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +27,8 @@ class TodayWeatherContainer extends StatelessWidget {
           () {
             if (weatherController.isWeatherLoading.value &&
                 weatherController.isCityLoading.value) {
-              return Center(
-                  child: CircularProgressIndicator(
-                color: Theme.of(Get.context!).colorScheme.onPrimary,
-              ));
+              return showLoader(
+                  color: Theme.of(Get.context!).colorScheme.onPrimary);
             }
 
             return Column(children: [
@@ -74,7 +73,7 @@ class _PrecipitationRow extends StatelessWidget {
               ),
         ),
         Text(
-          '${weatherController.weatherModel.value?.dailyWeatherList[0].precipitation ?? ''}mm',
+          '${weatherController.weatherModel.value.dailyWeatherList[0].precipitation}mm',
           style: Theme.of(Get.context!).textTheme.titleMedium?.copyWith(
                 color: Theme.of(Get.context!).colorScheme.onPrimary,
               ),
@@ -104,7 +103,7 @@ class _MinTempRow extends StatelessWidget {
               ),
         ),
         Text(
-          '${weatherController.weatherModel.value?.dailyWeatherList[0].minTemperature ?? ''}°C',
+          '${weatherController.weatherModel.value.dailyWeatherList[0].minTemperature ?? ''}°C',
           style: Theme.of(Get.context!).textTheme.titleMedium?.copyWith(
                 color: Theme.of(Get.context!).colorScheme.onPrimary,
               ),
@@ -134,7 +133,7 @@ class _MaxTempRow extends StatelessWidget {
               ),
         ),
         Text(
-          '${weatherController.weatherModel.value?.dailyWeatherList[0].maxTemperature ?? ''}°C',
+          '${weatherController.weatherModel.value.dailyWeatherList[0].maxTemperature ?? ''}°C',
           style: Theme.of(Get.context!).textTheme.titleMedium?.copyWith(
                 color: Theme.of(Get.context!).colorScheme.onPrimary,
               ),
@@ -154,8 +153,7 @@ class _DateRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     WeatherCategory weatherCategory =
-        weatherController.weatherModel.value?.dailyWeatherList[0].weatherCode ??
-            WeatherCategory.empty;
+        weatherController.weatherModel.value.dailyWeatherList[0].weatherCode;
     final IconData weatherIcon;
 
     switch (weatherCategory) {
@@ -176,7 +174,7 @@ class _DateRow extends StatelessWidget {
     return Row(
       children: [
         Text(
-          weatherController.weatherModel.value?.dailyWeatherList[0].date ?? '',
+          weatherController.weatherModel.value.dailyWeatherList[0].date,
           style: Theme.of(Get.context!).textTheme.titleSmall?.copyWith(
                 color: Theme.of(Get.context!).colorScheme.onPrimary,
               ),

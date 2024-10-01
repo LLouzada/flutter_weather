@@ -9,10 +9,10 @@ import 'package:flutter_weather/presentation/controllers/boot_controller.dart';
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
 
-  // Preserva a splash screen enquanto o app é inicializado
+  // Preserves the splash screen until the app is ready to be shown
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
-  // Aguarda a inicialização do DependencyInjector
+  // Aribeir
   await DependencyInjector.boot();
 
   // Inicia o BootController para determinar a rota inicial e inicializar o app

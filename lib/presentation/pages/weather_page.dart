@@ -3,7 +3,8 @@ import 'package:flutter_weather/app/config/app_constants.dart';
 import 'package:flutter_weather/app/config/app_routes.dart';
 import 'package:flutter_weather/presentation/controllers/theme_controller.dart';
 import 'package:flutter_weather/presentation/controllers/weather_controller.dart';
-import 'package:flutter_weather/presentation/pages/partials/today_weather.dart';
+import 'package:flutter_weather/presentation/pages/weather_partials/forecast_container.dart';
+import 'package:flutter_weather/presentation/pages/weather_partials/today_weather.dart';
 import 'package:get/get.dart';
 
 class WeatherPage extends StatelessWidget {
@@ -76,36 +77,8 @@ class WeatherPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             TodayWeatherContainer(weatherController: weatherController),
-            Container(
-              height: 150,
-              padding: const EdgeInsets.all(8.0),
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 7,
-                itemBuilder: (context, index) {
-                  return Card(
-                    margin: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Container(
-                      width: 120,
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Dia ${index + 1}',
-                            style: const TextStyle(fontSize: 16),
-                          ),
-                          const SizedBox(height: 10),
-                          const Text(
-                            '22°C',
-                            style: TextStyle(fontSize: 24),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              ),
+            ForecastWeatherContainer(
+              weatherController: weatherController,
             ),
             Container(
               height: 200,

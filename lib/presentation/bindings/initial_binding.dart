@@ -24,26 +24,33 @@ class InitialBinding extends Bindings {
     Get.lazyPut<OnboardingController>(() => OnboardingController());
 
     // Repositories
-    Get.lazyPut<LocationRepository>(() => LocationRepositoryImpl());
-    Get.lazyPut<CityRepository>(() => CityRepositoryImpl());
-    Get.lazyPut<WeatherRepository>(() => WeatherRepositoryImpl());
+    Get.lazyPut<LocationRepository>(() => LocationRepositoryImpl(),
+        fenix: true);
+    Get.lazyPut<CityRepository>(() => CityRepositoryImpl(), fenix: true);
+    Get.lazyPut<WeatherRepository>(() => WeatherRepositoryImpl(), fenix: true);
 
     // Use Cases
     Get.lazyPut<FetchLocationUseCase>(
-        () => FetchLocationUseCase(Get.find<LocationRepository>()));
+        () => FetchLocationUseCase(Get.find<LocationRepository>()),
+        fenix: true);
     Get.lazyPut<FetchCityUseCase>(
-        () => FetchCityUseCase(Get.find<CityRepository>()));
+        () => FetchCityUseCase(Get.find<CityRepository>()),
+        fenix: true);
     Get.lazyPut<FetchWeatherUseCase>(
-        () => FetchWeatherUseCase(Get.find<WeatherRepository>()));
+        () => FetchWeatherUseCase(Get.find<WeatherRepository>()),
+        fenix: true);
     Get.lazyPut<SearchCityUseCase>(
-        () => SearchCityUseCase(Get.find<CityRepository>()));
+        () => SearchCityUseCase(Get.find<CityRepository>()),
+        fenix: true);
     // Controllers
-    Get.lazyPut<WeatherController>(() => WeatherController(
-        Get.find<FetchLocationUseCase>(),
-        Get.find<FetchCityUseCase>(),
-        Get.find<FetchWeatherUseCase>()));
-    Get.lazyPut<CityController>(() => CityController(
-          Get.find<SearchCityUseCase>(),
-        ));
+    Get.lazyPut<WeatherController>(
+        () => WeatherController(Get.find<FetchLocationUseCase>(),
+            Get.find<FetchCityUseCase>(), Get.find<FetchWeatherUseCase>()),
+        fenix: true);
+    Get.lazyPut<CityController>(
+        () => CityController(
+              Get.find<SearchCityUseCase>(),
+            ),
+        fenix: true);
   }
 }

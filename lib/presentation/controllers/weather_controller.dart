@@ -17,7 +17,7 @@ class WeatherController extends GetxController with AppLogger {
 
   var locationModel = Rxn<LocationModel>();
   var cityModel = Rxn<CityModel>();
-  var weatherModel = Rxn<WeatherModel>();
+  var weatherModel = WeatherModel(dailyWeatherList: []).obs;
 
   var isCityLoading = false.obs;
   var isWeatherLoading = false.obs;
@@ -67,8 +67,6 @@ class WeatherController extends GetxController with AppLogger {
     } catch (e) {
       logE('Error fetching city: $e');
       cityErrorMessage.value = 'City not available.';
-    } finally {
-      isCityLoading.value = false;
     }
   }
 
@@ -76,14 +74,21 @@ class WeatherController extends GetxController with AppLogger {
     try {
       isWeatherLoading.value = true;
       final fetchedWeatherData = await fetchWeatherUseCase.execute(location);
-      logD('Fetched Weather Data: ${fetchedWeatherData.dailyWeatherList}');
 
-      weatherModel.value = fetchedWeatherData;
+      // Verifique se os dados são válidos e se a lista contém elementos
+      if (fetchedWeatherData.dailyWeatherList.isNotEmpty) {
+        logE('Fetched Weather Data: ${fetchedWeatherData.dailyWeatherList}');
+        weatherModel.value = fetchedWeatherData;
+      } else {
+        logE('Weather data is empty or invalid.');
+        _setDefaultWeather(); // Define um valor padrão se os dados estiverem vazios
+      }
     } catch (e) {
       logE('Error fetching weather: $e');
       weatherErrorMessage.value = 'Erro ao obter a previsão do tempo.';
     } finally {
       isWeatherLoading.value = false;
+      isCityLoading.value = false;
     }
   }
 
@@ -102,5 +107,11 @@ class WeatherController extends GetxController with AppLogger {
     logE('Setting default lat and long');
     locationModel.value =
         LocationModel(latitude: -23.5558, longitude: -46.6396);
+  }
+
+  void _setDefaultWeather() {
+    //todo - buscar no banco de dados antes de setar default
+    logE('Setting default weather');
+    weatherModel.value = WeatherModel(dailyWeatherList: []);
   }
 }
