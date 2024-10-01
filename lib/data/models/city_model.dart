@@ -1,4 +1,6 @@
-class CityModel {
+import 'package:flutter_weather/app/util/app_logger.dart';
+
+class CityModel with AppLogger {
   final String name;
   final String state;
   final String country;

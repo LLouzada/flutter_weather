@@ -43,8 +43,8 @@ class WeatherController extends GetxController with AppLogger {
       if (locationModel.value == null || locationModel.value?.isEmpty()) {
         _setDefaultLatLong();
       }
-      await fetchWeatherByLocation(locationModel.value!);
       await fetchCityByLocation(locationModel.value!);
+      await fetchWeatherByLocation(locationModel.value!);
     } catch (e) {
       logE('Error fetching location: $e');
       locationErrorMessage.value = 'Não foi possível obter a localização.';
@@ -76,9 +76,8 @@ class WeatherController extends GetxController with AppLogger {
     try {
       isWeatherLoading.value = true;
       final fetchedWeatherData = await fetchWeatherUseCase.execute(location);
-      logD(
-          'Fetched Weather Data: ${fetchedWeatherData.day1}, ${fetchedWeatherData.day1MinTemperature}, ${fetchedWeatherData.day1MaxTemperature} \n'
-          '${fetchedWeatherData.day1Precipitation}, ${fetchedWeatherData.day1Humidity}');
+      logD('Fetched Weather Data: ${fetchedWeatherData.dailyWeatherList}');
+
       weatherModel.value = fetchedWeatherData;
     } catch (e) {
       logE('Error fetching weather: $e');

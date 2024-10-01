@@ -1,8 +1,7 @@
 import 'package:flutter_weather/data/models/location_model.dart';
 import 'package:flutter_weather/data/models/weather_model.dart';
 import 'package:flutter_weather/domain/repositories/weather_repository.dart';
-
-import '../../app/core/usecases/param_usecase.dart';
+import 'package:flutter_weather/app/core/usecases/param_usecase.dart';
 
 class FetchWeatherUseCase extends ParamUseCase<WeatherModel, LocationModel> {
   final WeatherRepository _repository;
@@ -11,6 +10,6 @@ class FetchWeatherUseCase extends ParamUseCase<WeatherModel, LocationModel> {
 
   @override
   Future<WeatherModel> execute(LocationModel params) {
-    return _repository.fetchWeather();
+    return _repository.fetchWeather(params);
   }
 }

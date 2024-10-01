@@ -1,46 +1,86 @@
+import 'package:flutter_weather/app/util/app_logger.dart';
 import 'package:intl/intl.dart';
 
-class WeatherModel {
-  //today´s weather
-  final String day1;
-  final double day1MinTemperature;
-  final double day1MaxTemperature;
-  final double day1Precipitation;
-  final double day1Humidity;
+class WeatherModel with AppLogger {
+  final List<DailyWeather> dailyWeatherList;
 
   WeatherModel({
-    required this.day1,
-    required this.day1MinTemperature,
-    required this.day1MaxTemperature,
-    required this.day1Precipitation,
-    required this.day1Humidity,
+    required this.dailyWeatherList,
   });
 
   factory WeatherModel.fromJson(Map<String, dynamic> json) {
+    List<DailyWeather> dailyWeather = [];
+
+    List<dynamic> dates = json['daily']['time'];
+    List<dynamic> minTemps = json['daily']['temperature_2m_min'];
+    List<dynamic> maxTemps = json['daily']['temperature_2m_max'];
+    List<dynamic> precipitations = json['daily']['precipitation_sum'];
+    List<dynamic> weatherCodes = json['daily']['weather_code'];
+
+    // todo - não tem humidade por dia no open-meteo...
+    int defaultHumidity = json['current']['relative_humidity_2m'];
+
+    for (int i = 0; i < dates.length; i++) {
+      dailyWeather.add(DailyWeather(
+          date: DateFormat('dd/MM/yyyy').format(DateTime.parse(dates[i])),
+          minTemperature: minTemps[i],
+          maxTemperature: maxTemps[i],
+          precipitation: precipitations[i],
+          humidity: defaultHumidity,
+          weatherCode: WeatherConditions.getCategory(weatherCodes[i])));
+    }
+
     return WeatherModel(
-      day1: DateFormat('dd-MM-yyyy').format(json['day1']),
-      day1MinTemperature: json['day1MinTemperature'],
-      day1MaxTemperature: json['day1MaxTemperature'],
-      day1Precipitation: json['day1Precipitation'],
-      day1Humidity: json['day1Humidity'],
+      dailyWeatherList: dailyWeather,
     );
   }
 
   factory WeatherModel.empty() {
     return WeatherModel(
-      day1: DateFormat('dd/MM/yyyy').format(DateTime.now()),
-      day1MinTemperature: 0.0,
-      day1MaxTemperature: 0.0,
-      day1Precipitation: 0.0,
-      day1Humidity: 0.0,
+      dailyWeatherList: [],
     );
   }
 
-  isEmpty() {
-    return day1 == '' &&
-        day1MinTemperature == 0.0 &&
-        day1MaxTemperature == 0.0 &&
-        day1Precipitation == 0.0 &&
-        day1Humidity == 0.0;
+  bool isEmpty() {
+    return dailyWeatherList.isEmpty;
+  }
+}
+
+class DailyWeather {
+  final String date;
+  final double minTemperature;
+  final double maxTemperature;
+  final double precipitation;
+  final int humidity;
+  final WeatherCategory weatherCode;
+
+  DailyWeather({
+    required this.date,
+    required this.minTemperature,
+    required this.maxTemperature,
+    required this.precipitation,
+    required this.humidity,
+    required this.weatherCode,
+  });
+}
+
+enum WeatherCategory { sun, cloudy, storm, empty }
+
+class WeatherConditions {
+  static WeatherCategory getCategory(int code) {
+    if (code == 0 || code == 1 || code == 2 || code == 3) {
+      return WeatherCategory.sun; // Clear sky and mainly clear
+    } else if (code >= 45 && code <= 48 ||
+        (code >= 51 && code <= 57) ||
+        (code >= 61 && code <= 75) ||
+        code == 77 ||
+        (code >= 80 && code <= 82) ||
+        (code >= 85 && code <= 86)) {
+      return WeatherCategory.cloudy; // Fog, drizzle, rain, snow, etc.
+    } else if (code == 95 || code == 96 || code == 99) {
+      return WeatherCategory.storm; // Thunderstorms
+    } else {
+      return WeatherCategory.empty; // Other weather conditions
+    }
   }
 }

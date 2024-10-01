@@ -1,4 +1,6 @@
-class LocationModel {
+import 'package:flutter_weather/app/util/app_logger.dart';
+
+class LocationModel with AppLogger {
   final double latitude;
   final double longitude;
 

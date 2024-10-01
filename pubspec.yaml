@@ -41,12 +41,15 @@ dependencies:
   permission_handler: ^11.3.1
   shared_preferences: ^2.3.2
   tuple: ^2.0.2
+  weather_icons: ^3.0.0
+  
 
 dev_dependencies:
   flutter_launcher_icons: ^0.14.1
   flutter_lints: ^4.0.0
   flutter_test:
     sdk: flutter
+
 
 flutter_native_splash:
   android: true
