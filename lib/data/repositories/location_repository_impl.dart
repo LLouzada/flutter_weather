@@ -2,28 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_weather/app/util/app_logger.dart';
 import 'package:flutter_weather/data/models/location_model.dart';
 import 'package:flutter_weather/domain/repositories/location_repository.dart';
+import 'package:flutter_weather/presentation/controllers/permission_controller.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 
 class LocationRepositoryImpl with AppLogger implements LocationRepository {
+  final PermissionController _permissionController =
+      Get.find<PermissionController>();
   @override
   Future<LocationModel> getCurrentLocation() async {
-    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
+    if (!(await _permissionController.hasLocationServiceEnabled())) {
       logE('Location services are disabled.');
       _locationExceptionSnackbar();
-      return _locationException();
+      return LocationModel.empty();
     }
 
-    LocationPermission permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission != LocationPermission.whileInUse &&
-          permission != LocationPermission.always) {
-        logE('Location permission denied.');
-        _locationExceptionSnackbar();
-        return _locationException();
-      }
+    if (!(await _permissionController.hasLocationPermission())) {
+      logE('Location permission denied.');
+      _locationExceptionSnackbar();
+      return LocationModel.empty();
     }
 
     Position position = await Geolocator.getCurrentPosition();
@@ -32,10 +29,6 @@ class LocationRepositoryImpl with AppLogger implements LocationRepository {
       latitude: position.latitude,
       longitude: position.longitude,
     );
-  }
-
-  LocationModel _locationException() {
-    return LocationModel(latitude: -1, longitude: -1);
   }
 
   void _locationExceptionSnackbar() {

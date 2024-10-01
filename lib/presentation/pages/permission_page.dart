@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_weather/app/config/app_routes.dart';
 import 'package:flutter_weather/presentation/controllers/permission_controller.dart';
 import 'package:get/get.dart';
 
@@ -42,8 +43,8 @@ class PermissionPage extends StatelessWidget {
             ),
             SizedBox(height: sizedBoxHeight),
             SizedBox(
-              width: 300, // Defina a largura que você deseja
-              height: 50, // Defina a altura que você deseja
+              width: 300,
+              height: 50,
               child: FilledButton(
                 onPressed: () async {
                   permissionController.handleLocastionPermission();
@@ -56,6 +57,20 @@ class PermissionPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: sizedBoxHeight),
+            SizedBox(
+              width: 300,
+              height: 50,
+              child: TextButton(
+                onPressed: () async {
+                  Get.offAllNamed(AppRoutes.home.path);
+                },
+                child: Text(
+                  'Pular por agora',
+                  style: Theme.of(Get.context!).textTheme.titleLarge?.copyWith(
+                      color: Theme.of(Get.context!).colorScheme.onSurface),
+                ),
+              ),
+            ),
           ],
         ),
       ),
