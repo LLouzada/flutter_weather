@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_weather/app/config/app_constants.dart';
 import 'package:flutter_weather/presentation/controllers/theme_controller.dart';
 import 'package:flutter_weather/presentation/controllers/weather_controller.dart';
+import 'package:flutter_weather/presentation/pages/partials/today_weather.dart';
 import 'package:get/get.dart';
 
 class WeatherPage extends StatelessWidget {
@@ -30,66 +31,7 @@ class WeatherPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Container(
-                padding: const EdgeInsets.all(16.0),
-                margin: const EdgeInsets.all(8.0),
-                height: 200,
-                decoration: BoxDecoration(
-                  color: Theme.of(Get.context!).colorScheme.primary,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Obx(
-                  () {
-                    if (weatherController.isWeatherLoading.value &&
-                        weatherController.isCityLoading.value) {
-                      return Center(
-                          child: CircularProgressIndicator(
-                        color: Theme.of(Get.context!).colorScheme.onPrimary,
-                      ));
-                    }
-                    return Column(children: [
-                      Row(
-                        children: [
-                          Text(
-                            weatherController.cityModel.value?.name ?? '',
-                            style: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(width: 10),
-                          Text(
-                            weatherController.cityModel.value?.state ?? '',
-                            style: const TextStyle(
-                              fontSize: 16,
-                            ),
-                          ),
-                          Text(
-                            weatherController.cityModel.value?.country ?? '',
-                            style: const TextStyle(
-                              fontSize: 16,
-                            ),
-                          )
-                        ],
-                      ),
-                      Text(
-                        '${weatherController.weatherModel.value?.day1}°C',
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        weatherController.weatherModel.value?.day1MaxTemperature
-                                .toString() ??
-                            '',
-                        style: const TextStyle(
-                          fontSize: 18,
-                        ),
-                      )
-                    ]);
-                  },
-                )),
+            TodayWeatherContainer(weatherController: weatherController),
             Container(
               height: 150,
               padding: const EdgeInsets.all(8.0),

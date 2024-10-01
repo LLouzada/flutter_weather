@@ -1,6 +1,8 @@
+import 'package:intl/intl.dart';
+
 class WeatherModel {
   //today´s weather
-  final DateTime day1;
+  final String day1;
   final double day1MinTemperature;
   final double day1MaxTemperature;
   final double day1Precipitation;
@@ -16,7 +18,7 @@ class WeatherModel {
 
   factory WeatherModel.fromJson(Map<String, dynamic> json) {
     return WeatherModel(
-      day1: DateTime.parse(json['day1']),
+      day1: DateFormat('dd-MM-yyyy').format(json['day1']),
       day1MinTemperature: json['day1MinTemperature'],
       day1MaxTemperature: json['day1MaxTemperature'],
       day1Precipitation: json['day1Precipitation'],
@@ -26,7 +28,7 @@ class WeatherModel {
 
   factory WeatherModel.empty() {
     return WeatherModel(
-      day1: DateTime.now(),
+      day1: DateFormat('dd/MM/yyyy').format(DateTime.now()),
       day1MinTemperature: 0.0,
       day1MaxTemperature: 0.0,
       day1Precipitation: 0.0,
@@ -35,7 +37,7 @@ class WeatherModel {
   }
 
   isEmpty() {
-    return day1 == DateTime.now() &&
+    return day1 == '' &&
         day1MinTemperature == 0.0 &&
         day1MaxTemperature == 0.0 &&
         day1Precipitation == 0.0 &&

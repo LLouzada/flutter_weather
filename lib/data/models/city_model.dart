@@ -8,8 +8,8 @@ class CityModel {
   factory CityModel.fromJson(Map<String, dynamic> json) {
     return CityModel(
       name: json['city'] ?? '',
-      state: json['state'] ?? '',
-      country: json['country'] ?? '',
+      state: '${' - ' + json['state']}, ',
+      country: json['country_code']?.toUpperCase() ?? '',
     );
   }
 
