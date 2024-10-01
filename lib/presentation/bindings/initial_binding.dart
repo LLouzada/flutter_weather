@@ -1,12 +1,17 @@
+import 'package:flutter_weather/data/repositories/city_repository.dart';
 import 'package:flutter_weather/data/repositories/location_repository.dart';
+import 'package:flutter_weather/domain/repositories/city_repository.dart';
 import 'package:flutter_weather/domain/repositories/location_repository.dart';
+import 'package:flutter_weather/domain/usecases/fetch_city_use_case.dart';
 import 'package:flutter_weather/domain/usecases/fetch_location_use_case.dart';
-import 'package:flutter_weather/presentation/controllers/location_controller.dart';
 import 'package:flutter_weather/presentation/controllers/onboarding_controller.dart';
+import 'package:flutter_weather/presentation/controllers/weather_controller.dart';
 import 'package:get/get.dart';
 
-/// Add controllers to the Getx dependency injection system.
-/// This way, they can be accessed from anywhere in the app.
+/// Binds the dependencies for the initial setup of the application.
+///
+/// These dependencies are set up using the GetX dependency injection system,
+/// which allows for lazy initialization and automatic resolution of dependencies.
 class InitialBinding extends Bindings {
   @override
   void dependencies() {
@@ -14,11 +19,17 @@ class InitialBinding extends Bindings {
     Get.lazyPut<OnboardingController>(() => OnboardingController(),
         fenix: true);
 
-    // Location Dependencies
+    // Repositories
     Get.lazyPut<LocationRepository>(() => LocationRepositoryImpl());
+    Get.lazyPut<CityRepository>(() => CityRepositoryImpl());
+
+    // Use Cases
     Get.lazyPut<FetchLocationUseCase>(
         () => FetchLocationUseCase(Get.find<LocationRepository>()));
-    Get.lazyPut<LocationController>(
-        () => LocationController(Get.find<FetchLocationUseCase>()));
+    Get.lazyPut<FetchCityUseCase>(
+        () => FetchCityUseCase(Get.find<CityRepository>()));
+
+    Get.lazyPut<WeatherController>(() => WeatherController(
+        Get.find<FetchLocationUseCase>(), Get.find<FetchCityUseCase>()));
   }
 }

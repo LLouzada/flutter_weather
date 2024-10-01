@@ -11,20 +11,20 @@ class PermissionController extends GetxController with AppLogger {
 
   void handleLocastionPermission() async {
     await Permission.location.onDeniedCallback(() {
-      logd('Permission denied');
+      logD('Permission denied');
       _showlocationPermissionSnackBar();
     }).onGrantedCallback(() {
-      logd('Permission granted');
+      logD('Permission granted');
       Get.offAllNamed(AppRoutes.home.path);
     }).onPermanentlyDeniedCallback(() {
-      logd('permanently denied');
+      logD('permanently denied');
       Get.offAllNamed(AppRoutes.permission.path);
     }).onRestrictedCallback(() {
-      logd('Permission restricted');
+      logD('Permission restricted');
     }).onLimitedCallback(() {
-      logd('Permission limited');
+      logD('Permission limited');
     }).onProvisionalCallback(() {
-      logd('Permission provisional');
+      logD('Permission provisional');
     }).request();
   }
 

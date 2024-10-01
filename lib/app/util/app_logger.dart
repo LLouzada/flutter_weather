@@ -1,27 +1,35 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_weather/app/config/app_constants.dart';
-import 'package:get/get.dart';
 
 mixin AppLogger {
   final bool _isDebugMode = AppConstants.isDebugMode;
-  final RxBool _isLoggerInitialized = false.obs;
+  bool _isLoggerInitialized = false;
 
   // Códigos de escape ANSI
   static const String _reset = '\x1B[0m';
   static const String _green = '\x1B[32m';
-  // static const String _red = '\x1B[31m';
+  static const String _red = '\x1B[31m';
   // static const String _yellow = '\x1B[33m';
 
   void initLogger() {
     _defineDebugPrint();
-    _isLoggerInitialized.value = true;
+    _isLoggerInitialized = true;
   }
 
-  void logd(String message) {
-    if (!_isLoggerInitialized.value) {
+  /// Debug log
+  void logD(String message) {
+    if (!_isLoggerInitialized) {
       initLogger();
     }
     debugPrint(_formatMessage(message, color: _green));
+  }
+
+  /// Error log
+  void logE(String message) {
+    if (!_isLoggerInitialized) {
+      initLogger();
+    }
+    debugPrint(_formatMessage(message, color: _red));
   }
 
   void _defineDebugPrint() {

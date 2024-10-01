@@ -17,11 +17,11 @@ class ThemeController extends GetxController with AppLogger {
   void onInit() {
     super.onInit();
     _storage = Get.find<LocalStorageService>();
-    logd('Storage is null: ${_storage == null}');
+    logD('Storage is null: ${_storage == null}');
 
     // Verifica se o usuário já selecionou um tema
     final theme = _storage!.getBool(AppConstants.storeKeyIsDarkTheme);
-    logd('isDarkTheme: $theme');
+    logD('isDarkTheme: $theme');
     if (theme != null) {
       isDarkMode.value = theme;
       Get.changeThemeMode(isDarkMode.value ? ThemeMode.dark : ThemeMode.light);
@@ -37,7 +37,7 @@ class ThemeController extends GetxController with AppLogger {
   // Método para alternar entre os temas manualmente
   void toggleTheme() async {
     isDarkMode.value = !isDarkMode.value;
-    logd('toggling theme: $isDarkMode, storage is null: ${_storage == null}');
+    logD('toggling theme: $isDarkMode, storage is null: ${_storage == null}');
     await _storage!.setBool(AppConstants.storeKeyIsDarkTheme, isDarkMode.value);
     Get.changeThemeMode(isDarkMode.value ? ThemeMode.dark : ThemeMode.light);
   }

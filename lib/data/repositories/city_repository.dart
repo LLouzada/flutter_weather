@@ -1,13 +1,26 @@
+import 'package:flutter_weather/app/util/app_logger.dart';
 import 'package:flutter_weather/data/models/city_model.dart';
+import 'package:flutter_weather/data/models/location_model.dart';
+import 'package:flutter_weather/data/providers/network/apis/map/map_api.dart';
 import 'package:flutter_weather/domain/repositories/city_repository.dart';
 
-class CityRepositoryImpl implements CityRepository {
+class CityRepositoryImpl with AppLogger implements CityRepository {
   @override
-  Future<CityModel> fetchCityFromLatLng(double lat, double lng) {
-    //todo - implement fetchCityFromLatLng logic
-    return Future.delayed(
-      const Duration(seconds: 2),
-      () => CityModel(name: 'São Paulo', country: 'Brasil'),
+  Future<CityModel> fetchCityFromLocation(LocationModel location) async {
+    final mapApi = MapApi.reverse(location);
+    final response = await mapApi.request();
+
+    logD(
+      'Fetching city from location: ${location.latitude}, ${location.longitude}, response: $response',
     );
+
+    // Fazendo o parsing da resposta
+    if (response != null && response is Map<String, dynamic>) {
+      final address = response['address'];
+      return CityModel.fromJson(address); // Usando o factory constructor
+    }
+
+    //todo - usar cidade default / ultimo histórico
+    throw Exception('City not found from location');
   }
 }

@@ -11,7 +11,7 @@ class BootController extends GetxController with AppLogger {
   LocalStorageService? _storage;
 
   Future<bool> boot() async {
-    logd('booting app');
+    logD('booting app');
     _storage = Get.find<LocalStorageService>();
     await _determineInitialRoute();
     isAppInitialized.value = true;
@@ -22,11 +22,11 @@ class BootController extends GetxController with AppLogger {
   String get getInitialRoute => _initialRoute.value;
 
   Future<void> _determineInitialRoute() async {
-    logd('determining initial route');
+    logD('determining initial route');
     bool hasSeenOnboarding = await _checkOnboardingStatus();
 
     if (!hasSeenOnboarding) {
-      logd('initial route: onboarding');
+      logD('initial route: onboarding');
       _initialRoute.value = AppRoutes.onboarding.path;
       return;
     }
@@ -34,12 +34,12 @@ class BootController extends GetxController with AppLogger {
     bool hasLocationPermission = await _checkLocationPermission();
 
     if (!hasLocationPermission) {
-      logd('initial route: permission');
+      logD('initial route: permission');
       _initialRoute.value = AppRoutes.permission.path;
       return;
     }
 
-    logd('initial route: home');
+    logD('initial route: home');
     _initialRoute.value = AppRoutes.home.path;
   }
 
@@ -47,7 +47,7 @@ class BootController extends GetxController with AppLogger {
   Future<bool> _checkOnboardingStatus() async {
     final bool? hasSeenOnboarding =
         _storage!.getBool(AppConstants.storeKeyOnboarding);
-    logd('hasSeenOnboarding: $hasSeenOnboarding');
+    logD('hasSeenOnboarding: $hasSeenOnboarding');
     return hasSeenOnboarding ?? false;
   }
 
@@ -55,7 +55,7 @@ class BootController extends GetxController with AppLogger {
   Future<bool> _checkLocationPermission() async {
     final bool hasLocationPermission =
         await Get.find<PermissionController>().hasLocationPermission();
-    logd('hasLocationPermission: $hasLocationPermission');
+    logD('hasLocationPermission: $hasLocationPermission');
     return hasLocationPermission;
   }
 }

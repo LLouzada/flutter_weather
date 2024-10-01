@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_weather/app/config/app_constants.dart';
-import 'package:flutter_weather/presentation/controllers/location_controller.dart';
 import 'package:flutter_weather/presentation/controllers/theme_controller.dart';
+import 'package:flutter_weather/presentation/controllers/weather_controller.dart';
 import 'package:get/get.dart';
 
 class WeatherPage extends StatelessWidget {
@@ -10,8 +10,7 @@ class WeatherPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeController themeController = Get.find<ThemeController>();
-    final LocationController locationController =
-        Get.find<LocationController>();
+    final WeatherController weatherController = Get.find<WeatherController>();
 
     return Scaffold(
       appBar: AppBar(
@@ -39,7 +38,7 @@ class WeatherPage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Obx(() {
-                if (locationController.isLoading.value) {
+                if (weatherController.isLoading.value) {
                   return Center(
                     child: CircularProgressIndicator(
                       color: Theme.of(Get.context!).colorScheme.onPrimary,
@@ -47,15 +46,17 @@ class WeatherPage extends StatelessWidget {
                   );
                 }
 
-                if (locationController.errorMessage.isNotEmpty) {
-                  return Text(
-                      'Erro: ${locationController.errorMessage.value}'); // Mostra erro, se houver
+                if (weatherController.errorMessage.isNotEmpty) {
+                  return Center(
+                    child: Text(
+                        'Erro ao buscar localização: ${weatherController.errorMessage.value} \n'
+                        'Você pode tentar novamente ou pesquisar uma cidade.'),
+                  ); // Mostra erro, se houver
                 }
 
-                if (locationController.location.value != null) {
-                  final location = locationController.location.value!;
-                  return Text(
-                      'Latitude: ${location.latitude}, Longitude: ${location.longitude}');
+                if (weatherController.locationModel.value != null) {
+                  final city = weatherController.cityModel.value!;
+                  return Text('${city.name}, ${city.country}');
                 }
 
                 return const Column(

@@ -4,16 +4,30 @@ import 'package:flutter_weather/presentation/controllers/permission_controller.d
 import 'package:flutter_weather/presentation/controllers/theme_controller.dart';
 import 'package:get/get.dart';
 
+/// Initializes the dependency injection for the application.
+///
+/// This class is responsible for setting up the necessary dependencies for the
+/// application initialization, including the [LocalStorageService], [BootController],
+/// [PermissionController], and [ThemeController].
+///
+/// The [boot] method should be called during the application's startup to
+/// ensure that all required dependencies are properly initialized and available
+/// for use throughout the application.
 class DependencyInjector {
+  /// Initializes the dependency injection for the application initialization.
+  ///
+  /// This method sets up the necessary dependencies for the application,
+  /// including the [LocalStorageService], [BootController],
+  /// [PermissionController], and [ThemeController].
   static Future<void> boot() async {
-    // Inicializa o LocalStorageService de forma assíncrona
+    // Initializes the LocalStorageService asynchronously
     await Get.putAsync<LocalStorageService>(() async {
       final service = LocalStorageService();
       await service.init();
       return service;
     });
 
-    // Controllers necessário no boot
+    // Registers the necessary controllers for the boot process
     Get.put(BootController());
     Get.put(PermissionController());
     Get.put(ThemeController());

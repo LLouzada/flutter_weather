@@ -23,7 +23,7 @@ class LocalStorageService extends GetxService with AppLogger {
   }
 
   bool? getBool(String key) {
-    logd('shared prefs is null: ${_sharedPreferences == null}');
+    logD('shared prefs is null: ${_sharedPreferences == null}');
     return _sharedPreferences?.getBool(key);
   }
 }
