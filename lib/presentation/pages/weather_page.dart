@@ -28,52 +28,74 @@ class WeatherPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Container(
-              padding: const EdgeInsets.all(16.0),
-              margin: const EdgeInsets.all(8.0),
-              height: 200,
-              decoration: BoxDecoration(
-                color: Theme.of(Get.context!).colorScheme.primary,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Obx(() {
-                if (weatherController.isCityLoading.value) {
-                  return Center(
-                    child: CircularProgressIndicator(
-                      color: Theme.of(Get.context!).colorScheme.onPrimary,
-                    ),
-                  );
-                }
-
-                if (weatherController.locationErrorMessage.isNotEmpty) {
-                  return Center(
-                    child: Text(
-                        'Erro ao buscar localização: ${weatherController.locationErrorMessage.value} \n'
-                        'Você pode tentar novamente ou pesquisar uma cidade.'),
-                  ); // Mostra erro, se houver
-                }
-
-                if (weatherController.locationModel.value != null) {
-                  final city = weatherController.cityModel.value!;
-                  return Text('${city.name}, ${city.country}');
-                }
-
-                return const Column(
+                padding: const EdgeInsets.all(16.0),
+                margin: const EdgeInsets.all(8.0),
+                height: 200,
+                decoration: BoxDecoration(
+                  color: Theme.of(Get.context!).colorScheme.primary,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Column(
                   children: [
-                    Text(
-                      'Temperatura Hoje',
-                      style: TextStyle(fontSize: 24, color: Colors.white),
-                    ),
-                    SizedBox(height: 10),
-                    Text(
-                      '25°C',
-                      style: TextStyle(fontSize: 48, color: Colors.white),
-                    ),
+                    Obx(() {
+                      if (weatherController.isWeatherLoading.value) {
+                        return const CircularProgressIndicator();
+                      }
+                      return Row(
+                        children: [
+                          Text(
+                            weatherController.cityModel.value?.name ?? '',
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          Text(
+                            weatherController.cityModel.value?.state ?? '',
+                            style: const TextStyle(
+                              fontSize: 16,
+                            ),
+                          ),
+                          Text(
+                            weatherController.cityModel.value?.country ?? '',
+                            style: const TextStyle(
+                              fontSize: 16,
+                            ),
+                          )
+                        ],
+                      );
+                    }),
+                    Obx(() {
+                      if (weatherController.isWeatherLoading.value) {
+                        return const CircularProgressIndicator();
+                      }
+                      return Text(
+                        '${weatherController.weatherModel.value?.day1}°C',
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      );
+                    }),
+                    Obx(() {
+                      if (weatherController.isWeatherLoading.value) {
+                        return const CircularProgressIndicator();
+                      }
+                      return Text(
+                        weatherController.weatherModel.value?.day1MaxTemperature
+                                .toString() ??
+                            '',
+                        style: const TextStyle(
+                          fontSize: 18,
+                        ),
+                      );
+                    }),
                   ],
-                );
-              }),
-            ),
+                )),
             Container(
               height: 150,
               padding: const EdgeInsets.all(8.0),
