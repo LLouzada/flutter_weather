@@ -56,7 +56,8 @@ class SearchCityPage extends StatelessWidget {
                     return ListTile(
                       title: Text(city.name),
                       subtitle: Text(
-                          'Latitude: ${city.latitude}, Longitude: ${city.longitude}'),
+                          //diminuir a quantidade de caracteres de latitude e longitude
+                          'Latitude: ${city.latitude.substring(0, 9)}, Longitude: ${city.longitude.substring(0, 9)}'),
                       onTap: () {
                         // Ação ao clicar na cidade (ex: navegar para detalhes)
                       },
