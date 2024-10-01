@@ -7,6 +7,8 @@ import 'package:flutter_weather/domain/repositories/weather_repository.dart';
 import 'package:flutter_weather/domain/usecases/fetch_city_use_case.dart';
 import 'package:flutter_weather/domain/usecases/fetch_location_use_case.dart';
 import 'package:flutter_weather/domain/usecases/fetch_weather_use_case.dart';
+import 'package:flutter_weather/domain/usecases/search_city_use_case.dart';
+import 'package:flutter_weather/presentation/controllers/city_controller.dart';
 import 'package:flutter_weather/presentation/controllers/onboarding_controller.dart';
 import 'package:flutter_weather/presentation/controllers/weather_controller.dart';
 import 'package:get/get.dart';
@@ -33,11 +35,15 @@ class InitialBinding extends Bindings {
         () => FetchCityUseCase(Get.find<CityRepository>()));
     Get.lazyPut<FetchWeatherUseCase>(
         () => FetchWeatherUseCase(Get.find<WeatherRepository>()));
-
+    Get.lazyPut<SearchCityUseCase>(
+        () => SearchCityUseCase(Get.find<CityRepository>()));
     // Controllers
     Get.lazyPut<WeatherController>(() => WeatherController(
         Get.find<FetchLocationUseCase>(),
         Get.find<FetchCityUseCase>(),
         Get.find<FetchWeatherUseCase>()));
+    Get.lazyPut<CityController>(() => CityController(
+          Get.find<SearchCityUseCase>(),
+        ));
   }
 }

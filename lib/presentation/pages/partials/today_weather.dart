@@ -18,7 +18,6 @@ class TodayWeatherContainer extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         margin: const EdgeInsets.all(8.0),
         height: 200,
-        // clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
           color: Theme.of(Get.context!).colorScheme.primary,
           borderRadius: BorderRadius.circular(10),

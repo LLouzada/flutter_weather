@@ -4,6 +4,7 @@ enum AppRoutes {
   permission,
   onboarding,
   settings,
+  search,
 }
 
 extension AppRoutesExtension on AppRoutes {
@@ -19,6 +20,8 @@ extension AppRoutesExtension on AppRoutes {
         return '/onboarding';
       case AppRoutes.settings:
         return '/settings';
+      case AppRoutes.search:
+        return '/search';
       default:
         return '/';
     }

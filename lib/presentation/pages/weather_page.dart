@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_weather/app/config/app_constants.dart';
+import 'package:flutter_weather/app/config/app_routes.dart';
 import 'package:flutter_weather/presentation/controllers/theme_controller.dart';
 import 'package:flutter_weather/presentation/controllers/weather_controller.dart';
 import 'package:flutter_weather/presentation/pages/partials/today_weather.dart';
@@ -18,11 +19,54 @@ class WeatherPage extends StatelessWidget {
         title: const Text(AppConstants.appName),
         centerTitle: true,
         actions: [
-          IconButton(
-            icon: const Icon(Icons.brightness_6),
-            onPressed: () {
-              themeController.toggleTheme();
+          PopupMenuButton<int>(
+            icon: const Icon(Icons.menu),
+            onSelected: (value) {
+              switch (value) {
+                case 0:
+                  themeController.toggleTheme();
+                  break;
+                case 1:
+                  Get.toNamed(AppRoutes.search.path);
+                  break;
+                case 2:
+
+                // Adicione mais cases se houver mais opções
+              }
             },
+            itemBuilder: (context) => [
+              const PopupMenuItem(
+                value: 0,
+                child: Row(
+                  children: [
+                    Icon(Icons.brightness_6),
+                    SizedBox(width: 8),
+                    Text('Trocar tema'),
+                  ],
+                ),
+              ),
+              const PopupMenuItem(
+                value: 1,
+                child: Row(
+                  children: [
+                    Icon(Icons.location_pin),
+                    SizedBox(width: 8),
+                    Text('Procurar Cidade'),
+                  ],
+                ),
+              ),
+              const PopupMenuItem(
+                value: 2,
+                child: Row(
+                  children: [
+                    Icon(Icons.settings),
+                    SizedBox(width: 8),
+                    Text('Configurações'),
+                  ],
+                ),
+              ),
+              // Você pode adicionar mais opções aqui
+            ],
           ),
         ],
       ),
