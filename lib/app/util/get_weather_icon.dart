@@ -1,25 +1,14 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_weather/data/models/weather_model.dart';
-import 'package:weather_icons/weather_icons.dart';
 
-IconData getWeatherIcon(WeatherCategory weatherCategory) {
-  final IconData weatherIcon;
-
+String getWeatherIcon(WeatherCategory weatherCategory) {
   switch (weatherCategory) {
     case WeatherCategory.sun:
-      weatherIcon = WeatherIcons.day_sunny;
-      break;
+      return 'assets/images/weather_sunny.png';
     case WeatherCategory.cloudy:
-      weatherIcon = WeatherIcons.day_cloudy;
-      {}
-      break;
+      return 'assets/images/weather_cloudy.png';
     case WeatherCategory.storm:
-      weatherIcon = WeatherIcons.rain_wind;
-      break;
+      return 'assets/images/weather_storm.png';
     default:
-      weatherIcon = WeatherIcons.day_sunny;
-      break;
+      return 'assets/images/weather_sunny.png';
   }
-
-  return weatherIcon;
 }

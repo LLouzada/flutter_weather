@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_weather/app/util/get_weather_icon.dart';
 import 'package:flutter_weather/data/models/weather_model.dart';
 import 'package:flutter_weather/presentation/controllers/weather_controller.dart';
 import 'package:flutter_weather/presentation/widgets/app_loader.dart';
@@ -152,25 +153,6 @@ class _DateRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WeatherCategory weatherCategory =
-        weatherController.weatherModel.value.dailyWeatherList[0].weatherCode;
-    final IconData weatherIcon;
-
-    switch (weatherCategory) {
-      case WeatherCategory.sun:
-        weatherIcon = WeatherIcons.day_sunny;
-        break;
-      case WeatherCategory.cloudy:
-        weatherIcon = WeatherIcons.day_cloudy;
-        {}
-        break;
-      case WeatherCategory.storm:
-        weatherIcon = WeatherIcons.rain_wind;
-        break;
-      default:
-        weatherIcon = WeatherIcons.day_sunny;
-        break;
-    }
     return Row(
       children: [
         Text(
@@ -191,10 +173,6 @@ class _DateRow extends StatelessWidget {
                 color: Theme.of(Get.context!).colorScheme.onPrimary,
               ),
         ),
-        const Spacer(),
-        Icon(weatherIcon,
-            color: Theme.of(Get.context!).colorScheme.onPrimary, size: 40),
-        const SizedBox(width: 20),
       ],
     );
   }
@@ -209,6 +187,8 @@ class _CityRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    WeatherCategory weatherCategory =
+        weatherController.weatherModel.value.dailyWeatherList[0].weatherCode;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -218,6 +198,12 @@ class _CityRow extends StatelessWidget {
                 color: Theme.of(Get.context!).colorScheme.onPrimary,
               ),
         ),
+        const Spacer(),
+        Image.asset(
+          getWeatherIcon(weatherCategory),
+          height: 48.0,
+          width: 48.0,
+        )
       ],
     );
   }

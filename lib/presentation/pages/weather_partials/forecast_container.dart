@@ -12,7 +12,6 @@ class ForecastWeatherContainer extends StatelessWidget {
     required this.weatherController,
   });
 
-  //todo - ta com um probleminha ao mudar o tema nesses Texts
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -55,7 +54,11 @@ class ForecastWeatherContainer extends StatelessWidget {
                                       .colorScheme
                                       .onPrimaryContainer,
                                 )),
-                        Icon(getWeatherIcon(dailyWeather.weatherCode))
+                        Image.asset(
+                          getWeatherIcon(dailyWeather.weatherCode),
+                          height: 24.0,
+                          width: 24.0,
+                        )
                       ],
                     ),
                     const SizedBox(height: 10),
