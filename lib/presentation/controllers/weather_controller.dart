@@ -67,6 +67,8 @@ class WeatherController extends GetxController with AppLogger {
 
       if (cityModel.value == null || cityModel.value?.isEmpty()) {
         _setDefaultCity();
+      } else {
+        await saveCity(cityModel.value!, location);
       }
     } catch (e) {
       logE('Error fetching city: $e');

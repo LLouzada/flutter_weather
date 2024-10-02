@@ -33,7 +33,7 @@ class HistoryPage extends StatelessWidget {
             final city = cityController.savedCities[index];
             return ListTile(
               title: Text(city.name),
-              subtitle: Text('Estado: ${city.state}, País: ${city.country}'),
+              subtitle: Text('${city.state.substring(2)} ${city.country}'),
               onTap: () async {
                 await weatherController.getWeatherByCitySearch(LocationModel(
                     latitude: city.latitude ?? 0.0,
