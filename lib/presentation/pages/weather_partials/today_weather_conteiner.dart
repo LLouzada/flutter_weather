@@ -4,8 +4,8 @@ import 'package:flutter_weather/data/models/weather_model.dart';
 import 'package:flutter_weather/presentation/controllers/weather_controller.dart';
 import 'package:flutter_weather/presentation/widgets/app_loader.dart';
 import 'package:get/get.dart';
-import 'package:weather_icons/weather_icons.dart';
 
+///  A container to show the today weather
 class TodayWeatherContainer extends StatelessWidget {
   final WeatherController weatherController;
 
@@ -54,6 +54,7 @@ class TodayWeatherContainer extends StatelessWidget {
   }
 }
 
+///  A row to show the city name
 class _PrecipitationRow extends StatelessWidget {
   const _PrecipitationRow({
     required this.weatherController,
@@ -84,6 +85,7 @@ class _PrecipitationRow extends StatelessWidget {
   }
 }
 
+///  A row to show the min temperature
 class _MinTempRow extends StatelessWidget {
   const _MinTempRow({
     required this.weatherController,
@@ -104,7 +106,7 @@ class _MinTempRow extends StatelessWidget {
               ),
         ),
         Text(
-          '${weatherController.weatherModel.value.dailyWeatherList[0].minTemperature ?? ''}°C',
+          '${weatherController.weatherModel.value.dailyWeatherList[0].minTemperature}°C',
           style: Theme.of(Get.context!).textTheme.titleMedium?.copyWith(
                 color: Theme.of(Get.context!).colorScheme.onPrimary,
               ),
@@ -114,6 +116,7 @@ class _MinTempRow extends StatelessWidget {
   }
 }
 
+///  A row to show the max temperature
 class _MaxTempRow extends StatelessWidget {
   const _MaxTempRow({
     required this.weatherController,
@@ -134,7 +137,7 @@ class _MaxTempRow extends StatelessWidget {
               ),
         ),
         Text(
-          '${weatherController.weatherModel.value.dailyWeatherList[0].maxTemperature ?? ''}°C',
+          '${weatherController.weatherModel.value.dailyWeatherList[0].maxTemperature}°C',
           style: Theme.of(Get.context!).textTheme.titleMedium?.copyWith(
                 color: Theme.of(Get.context!).colorScheme.onPrimary,
               ),
@@ -144,6 +147,7 @@ class _MaxTempRow extends StatelessWidget {
   }
 }
 
+///  A row to show the date
 class _DateRow extends StatelessWidget {
   const _DateRow({
     required this.weatherController,
@@ -178,6 +182,7 @@ class _DateRow extends StatelessWidget {
   }
 }
 
+///  A row to show the city name
 class _CityRow extends StatelessWidget {
   const _CityRow({
     required this.weatherController,

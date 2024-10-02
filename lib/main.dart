@@ -12,21 +12,21 @@ void main() async {
   // Preserves the splash screen until the app is ready to be shown
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
-  // Aribeir
+  // Awaits the boot dependencies to be initialized
   await DependencyInjector.boot();
 
-  // Inicia o BootController para determinar a rota inicial e inicializar o app
+  // Initializes the boot controller
   bool hasBooted = await Get.find<BootController>().boot();
   if (!hasBooted) {
     throw Exception('Erro ao iniciar o app');
   }
 
-  // Inicia o ThemeController para carregar os temas
+  // Initializes and builds the themes
   final ThemeController themeController = Get.find<ThemeController>();
   final ThemeData lightTheme = await themeController.buildLightTheme();
   final ThemeData darkTheme = await themeController.buildDarkTheme();
 
-  // Remove a splash screen
+  // Removes the splash screen after the app is ready to be shown
   FlutterNativeSplash.remove();
 
   runApp(App(lightTheme: lightTheme, darkTheme: darkTheme));

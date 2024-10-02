@@ -4,6 +4,7 @@ import 'package:flutter_weather/presentation/controllers/weather_controller.dart
 import 'package:flutter_weather/presentation/widgets/app_loader.dart';
 import 'package:get/get.dart';
 
+///  A container to show the forecast weather
 class ForecastWeatherContainer extends StatelessWidget {
   final WeatherController weatherController;
 

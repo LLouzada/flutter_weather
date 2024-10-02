@@ -4,6 +4,7 @@ import 'package:flutter_weather/presentation/controllers/weather_controller.dart
 import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
 
+/// A container to show the map
 class MapContainer extends StatelessWidget {
   const MapContainer({
     super.key,
@@ -29,6 +30,7 @@ class MapContainer extends StatelessWidget {
   }
 }
 
+/// A widget to build the map
 class MapBuilder extends StatelessWidget {
   final WeatherController weatherController;
 

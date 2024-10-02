@@ -6,6 +6,7 @@ import 'package:flutter_weather/presentation/controllers/boot_controller.dart';
 import 'package:flutter_weather/presentation/controllers/theme_controller.dart';
 import 'package:get/get.dart';
 
+/// The main app class
 class App extends StatelessWidget {
   final ThemeData lightTheme;
   final ThemeData darkTheme;

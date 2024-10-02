@@ -1,16 +1,29 @@
+
+<div align="center">
+<img src="https://github.com/LLouzada/flutter_weather/blob/main/assets/images/app_logo.png?raw=true" width="200" height="200">
+</diV>
+
+
 # flutter_weather
 
-A new Flutter project.
+## Executar
 
-## Getting Started
+- Basta clonar o projeto e executar no VS Code ou Android Studio
+ 
+``` 
+flutter run
+```
 
-This project is a starting point for a Flutter application.
+- Ou então instalar o apk no celular
+  
+obs: evitar build do tipo release, seria necessário mais algumas configurações para que funcione corretamente nesse modo.
 
-A few resources to get you started if this is your first Flutter project:
+## Infos:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Não foi possivel obter a humidade relativa na api que utilizei (open-meteo).
+- Faltou somente a implementação do *offline first*, está como um *TODO*.
+- Não tive tempo hábil para testar/publicar para iOS, porem, foram feitas as configurações pertinentes.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+
+

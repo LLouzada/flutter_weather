@@ -3,6 +3,7 @@ import 'package:flutter_weather/app/config/app_routes.dart';
 import 'package:flutter_weather/presentation/controllers/permission_controller.dart';
 import 'package:get/get.dart';
 
+///  A page to request the user's location permission
 class PermissionPage extends StatelessWidget {
   const PermissionPage({super.key});
 

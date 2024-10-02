@@ -3,6 +3,7 @@ import 'package:flutter_onboarding_slider/flutter_onboarding_slider.dart';
 import 'package:flutter_weather/presentation/controllers/onboarding_controller.dart';
 import 'package:get/get.dart';
 
+/// A page to display the onboarding screen
 class OnboardingPage extends StatelessWidget {
   const OnboardingPage({super.key});
 

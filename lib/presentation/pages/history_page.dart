@@ -4,6 +4,7 @@ import 'package:flutter_weather/presentation/controllers/city_controller.dart';
 import 'package:flutter_weather/presentation/controllers/weather_controller.dart';
 import 'package:get/get.dart';
 
+///  A page to show the history of searches
 class HistoryPage extends StatelessWidget {
   const HistoryPage({super.key});
 

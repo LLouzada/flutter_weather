@@ -8,6 +8,7 @@ import 'package:flutter_weather/presentation/pages/weather_partials/map_containe
 import 'package:flutter_weather/presentation/pages/weather_partials/today_weather_conteiner.dart';
 import 'package:get/get.dart';
 
+/// The main page of the app
 class WeatherPage extends StatelessWidget {
   const WeatherPage({super.key});
 

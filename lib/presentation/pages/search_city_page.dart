@@ -7,6 +7,7 @@ import 'package:flutter_weather/presentation/controllers/weather_controller.dart
 import 'package:flutter_weather/presentation/widgets/app_loader.dart';
 import 'package:get/get.dart';
 
+/// A page to search for a city
 class SearchCityPage extends StatelessWidget {
   const SearchCityPage({super.key});
 
