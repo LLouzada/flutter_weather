@@ -16,7 +16,7 @@ class MapContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       clipBehavior: Clip.hardEdge,
-      height: 600,
+      height: 500,
       margin: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
         color: Colors.grey[300],
@@ -47,7 +47,7 @@ class MapBuilder extends StatelessWidget {
       var currentLatLng = LatLng(location!.latitude, location.longitude);
 
       return FlutterMap(
-        options: MapOptions(initialCenter: currentLatLng),
+        options: MapOptions(initialCenter: currentLatLng, initialZoom: 13),
         children: [
           TileLayer(
             urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",

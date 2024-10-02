@@ -99,6 +99,8 @@ class WeatherController extends GetxController with AppLogger {
     isWeatherLoading.value = true;
     isCityLoading.value = true;
 
+    locationModel.value = location;
+
     await fetchCityByLocation(location);
     await fetchWeatherByLocation(location);
 

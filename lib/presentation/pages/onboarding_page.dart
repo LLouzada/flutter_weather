@@ -73,8 +73,7 @@ class OnboardingPage extends StatelessWidget {
                   SizedBox(
                     height: textSpace,
                   ),
-                  Text(
-                      'Acompanhe a previsão do tempo em qualquer lugar do mundo.',
+                  Text('Previsão do tempo em qualquer lugar do mundo.',
                       style: Theme.of(Get.context!).textTheme.titleSmall,
                       textAlign: TextAlign.center),
                   SizedBox(
@@ -92,15 +91,14 @@ class OnboardingPage extends StatelessWidget {
                     height: imageSpace,
                   ),
                   Text(
-                    'Offline First',
+                    'Previsão dos próximos dias',
                     style: Theme.of(context).textTheme.titleLarge,
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(
                     height: textSpace,
                   ),
-                  Text(
-                      'Mesmo sem conexão com a internet, você pode acompanhar a previsão do tempo a partir de dados armazenados localmente.',
+                  Text('Descubra o melhor momento para sua plantação!',
                       style: Theme.of(Get.context!).textTheme.titleSmall,
                       textAlign: TextAlign.center),
                   SizedBox(
