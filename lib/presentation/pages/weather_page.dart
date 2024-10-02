@@ -68,16 +68,6 @@ class _MainPopupMenuButton extends StatelessWidget {
           },
           itemBuilder: (context) => [
             const PopupMenuItem(
-              value: 0,
-              child: Row(
-                children: [
-                  Icon(Icons.brightness_6),
-                  SizedBox(width: 8),
-                  Text('Trocar tema'),
-                ],
-              ),
-            ),
-            const PopupMenuItem(
               value: 1,
               child: Row(
                 children: [
@@ -93,7 +83,17 @@ class _MainPopupMenuButton extends StatelessWidget {
                 children: [
                   Icon(Icons.history),
                   SizedBox(width: 8),
-                  Text('Historico de buscas'),
+                  Text('Historico de Cidades'),
+                ],
+              ),
+            ),
+            const PopupMenuItem(
+              value: 0,
+              child: Row(
+                children: [
+                  Icon(Icons.brightness_6),
+                  SizedBox(width: 8),
+                  Text('Trocar Tema'),
                 ],
               ),
             ),
