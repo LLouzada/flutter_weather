@@ -22,8 +22,13 @@ class OnboardingPage extends StatelessWidget {
         headerBackgroundColor: Theme.of(context).colorScheme.primary,
         imageHorizontalOffset: ((size.width - backgroundWidth) / 2),
         finishButtonText: 'Vamos lá!',
+        finishButtonTextStyle: Theme.of(Get.context!)
+            .textTheme
+            .titleLarge!
+            .copyWith(
+                color: Theme.of(Get.context!).colorScheme.onPrimaryContainer),
         finishButtonStyle: FinishButtonStyle(
-            backgroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
+            backgroundColor: Theme.of(context).colorScheme.primaryContainer,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
             )),
