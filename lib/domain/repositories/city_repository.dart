@@ -6,4 +6,10 @@ abstract class CityRepository {
   Future<CityModel> fetchCityFromLocation(LocationModel location);
 
   Future<List<CityDescriptionModel>> searchCityByName(String name);
+
+  Future<void> saveCity(CityModel city, LocationModel location);
+
+  Future<List<CityModel>> fetchHistory();
+
+  Future<void> clearHistory();
 }

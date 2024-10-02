@@ -1,4 +1,7 @@
+import 'package:flutter_weather/app/config/app_constants.dart';
 import 'package:flutter_weather/app/util/app_logger.dart';
+import 'package:flutter_weather/data/models/city_model.dart';
+import 'package:flutter_weather/data/models/location_model.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
@@ -18,24 +21,22 @@ class DatabaseProvider with AppLogger {
 
   Future<Database> _initDB() async {
     String path = join(await getDatabasesPath(), 'weather_app.db');
-    return await openDatabase(
-      path,
-      version: 1,
-      onCreate: _onCreate,
-    );
+    return await openDatabase(path,
+        version: AppConstants.appDbVersion, onCreate: _onCreate);
   }
 
   Future<void> _onCreate(Database db, int version) async {
     await db.execute('''
-      CREATE TABLE city (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT NOT NULL,
-        state TEXT,
-        country TEXT NOT NULL,
-        latitude REAL NOT NULL,
-        longitude REAL NOT NULL
-      )
-    ''');
+    CREATE TABLE city (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT NOT NULL,
+      state TEXT NOT NULL,
+      country TEXT NOT NULL,
+      latitude REAL NOT NULL,
+      longitude REAL NOT NULL,
+      date TEXT NOT NULL
+    )
+  ''');
 
     await db.execute('''
       CREATE TABLE weather (
@@ -52,65 +53,70 @@ class DatabaseProvider with AppLogger {
     ''');
   }
 
-  Future<int> insertWeatherData(Map<String, dynamic> data) async {
+  Future<void> saveCity(CityModel city, LocationModel location) async {
     final db = await database;
-    return await db.insert('weather_history', data);
+
+    final String cityName = city.name;
+    final String cityState = city.state;
+    final String cityCountry = city.country;
+    final double cityLatitude = location.latitude;
+    final double cityLongitude = location.longitude;
+    final String date = DateTime.now().toIso8601String();
+
+    try {
+      final List<Map<String, dynamic>> existingCity = await db.query(
+        'city',
+        where: 'name = ?',
+        whereArgs: [cityName],
+      );
+
+      if (existingCity.isNotEmpty) {
+        await db.update(
+          'city',
+          {'date': date},
+          where: 'name = ?',
+          whereArgs: [cityName],
+        );
+      } else {
+        await db.transaction((txn) async {
+          await txn.rawInsert(
+            'INSERT INTO city (name, state, country, latitude, longitude, date) VALUES (?, ?, ?, ?, ?, ?)',
+            [
+              cityName,
+              cityState,
+              cityCountry,
+              cityLatitude,
+              cityLongitude,
+              date
+            ],
+          );
+        });
+      }
+    } catch (e) {
+      logE('Erro ao salvar a cidade: $e');
+    }
   }
 
-  Future<List<Map<String, dynamic>>> getWeatherHistory() async {
+  Future<List<CityModel>> getCities() async {
     final db = await database;
-    return await db.query('weather_history');
+    final List<Map<String, dynamic>> maps =
+        await db.query('city', orderBy: 'date DESC');
+
+    return List.generate(maps.length, (i) {
+      return CityModel(
+        id: maps[i]['id'],
+        name: maps[i]['name'],
+        state: maps[i]['state'],
+        country: maps[i]['country'],
+        latitude: maps[i]['latitude'],
+        longitude: maps[i]['longitude'],
+      );
+    });
   }
 
-  Future<int> deleteWeatherData(int id) async {
+  Future<void> clearHistory() async {
     final db = await database;
-    return await db.delete(
-      'weather_history',
-      where: 'id = ?',
-      whereArgs: [id],
-    );
-  }
-
-  Future<void> clearWeatherHistory() async {
-    final db = await database;
-    await db.delete('weather_history');
-  }
-
-  Future<List<Map<String, dynamic>>> getWeatherHistoryByCity(int cityId) async {
-    final db = await database;
-    return await db.query(
-      'weather_history',
-      where: 'city_id = ?',
-      whereArgs: [cityId],
-    );
-  }
-
-  Future<void> insertCityData(Map<String, dynamic> data) async {
-    final db = await database;
-    await db.insert('city', data);
-  }
-
-  Future<List<Map<String, dynamic>>> getCityData() async {
-    final db = await database;
-    return await db.query('city');
-  }
-
-  Future<void> deleteCityData(int id) async {
-    final db = await database;
-    await db.delete(
-      'city',
-      where: 'id = ?',
-      whereArgs: [id],
-    );
-  }
-
-  Future<List<Map<String, dynamic>>> getCityDataById(int id) async {
-    final db = await database;
-    return await db.query(
-      'city',
-      where: 'id = ?',
-      whereArgs: [id],
-    );
+    await db.delete('city');
   }
 
   Future<void> close() async {

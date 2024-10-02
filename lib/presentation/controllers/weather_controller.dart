@@ -1,20 +1,23 @@
 import 'package:flutter_weather/app/config/app_routes.dart';
+import 'package:flutter_weather/app/core/usecases/save_city_params.dart';
 import 'package:flutter_weather/app/util/app_logger.dart';
 import 'package:flutter_weather/data/models/city_model.dart';
 import 'package:flutter_weather/data/models/location_model.dart';
 import 'package:flutter_weather/data/models/weather_model.dart';
 import 'package:flutter_weather/domain/usecases/fetch_city_use_case.dart';
-import 'package:flutter_weather/domain/usecases/fetch_location_use_case.dart';
-import 'package:flutter_weather/domain/usecases/fetch_weather_use_case.dart';
+import 'package:flutter_weather/domain/usecases/fetch_location_usecase.dart';
+import 'package:flutter_weather/domain/usecases/fetch_weather_usecase.dart';
+import 'package:flutter_weather/domain/usecases/save_city_usecase.dart';
 import 'package:get/get.dart';
 
 class WeatherController extends GetxController with AppLogger {
   final FetchLocationUseCase fetchLocationUseCase;
   final FetchCityUseCase fetchCityUseCase;
   final FetchWeatherUseCase fetchWeatherUseCase;
+  final SaveCityUseCase saveCityUseCase;
 
   WeatherController(this.fetchLocationUseCase, this.fetchCityUseCase,
-      this.fetchWeatherUseCase);
+      this.fetchWeatherUseCase, this.saveCityUseCase);
 
   var locationModel = Rxn<LocationModel>();
   var cityModel = Rxn<CityModel>();
@@ -76,13 +79,12 @@ class WeatherController extends GetxController with AppLogger {
       isWeatherLoading.value = true;
       final fetchedWeatherData = await fetchWeatherUseCase.execute(location);
 
-      // Verifique se os dados são válidos e se a lista contém elementos
       if (fetchedWeatherData.dailyWeatherList.isNotEmpty) {
         logE('Fetched Weather Data: ${fetchedWeatherData.dailyWeatherList}');
         weatherModel.value = fetchedWeatherData;
       } else {
         logE('Weather data is empty or invalid.');
-        _setDefaultWeather(); // Define um valor padrão se os dados estiverem vazios
+        _setDefaultWeather();
       }
     } catch (e) {
       logE('Error fetching weather: $e');
@@ -91,15 +93,22 @@ class WeatherController extends GetxController with AppLogger {
   }
 
   Future<void> getWeatherByCitySearch(LocationModel location) async {
+    Get.offAllNamed(AppRoutes.home.path);
     isWeatherLoading.value = true;
     isCityLoading.value = true;
 
-    Get.toNamed(AppRoutes.home.path);
     await fetchCityByLocation(location);
     await fetchWeatherByLocation(location);
 
     isCityLoading.value = false;
     isWeatherLoading.value = false;
+
+    await saveCity(cityModel.value!, location);
+  }
+
+  Future<void> saveCity(CityModel city, LocationModel location) async {
+    await saveCityUseCase
+        .execute(SaveCityParams(city: city, location: location));
   }
 
   void _setDefaultCity() {

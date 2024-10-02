@@ -2,6 +2,7 @@ import 'package:flutter_weather/app/util/app_logger.dart';
 import 'package:flutter_weather/data/models/city_description_model.dart';
 import 'package:flutter_weather/data/models/city_model.dart';
 import 'package:flutter_weather/data/models/location_model.dart';
+import 'package:flutter_weather/data/providers/database/database_provider.dart';
 import 'package:flutter_weather/data/providers/network/apis/map/map_api.dart';
 import 'package:flutter_weather/domain/repositories/city_repository.dart';
 
@@ -37,5 +38,25 @@ class CityRepositoryImpl with AppLogger implements CityRepository {
     }
 
     return CityDescriptionModel.emptyList();
+  }
+
+  @override
+  Future<void> saveCity(CityModel city, LocationModel location) async {
+    final databaseProvider = DatabaseProvider();
+    return databaseProvider.saveCity(city, location);
+  }
+
+  @override
+  Future<List<CityModel>> fetchHistory() {
+    final databaseProvider = DatabaseProvider();
+    Future<List<CityModel>> cities = databaseProvider.getCities();
+    logE('Fetching history: $cities');
+    return cities;
+  }
+
+  @override
+  Future<void> clearHistory() async {
+    final databaseProvider = DatabaseProvider();
+    return databaseProvider.clearHistory();
   }
 }

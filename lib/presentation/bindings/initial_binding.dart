@@ -4,10 +4,13 @@ import 'package:flutter_weather/data/repositories/weather_repository_impl.dart';
 import 'package:flutter_weather/domain/repositories/city_repository.dart';
 import 'package:flutter_weather/domain/repositories/location_repository.dart';
 import 'package:flutter_weather/domain/repositories/weather_repository.dart';
+import 'package:flutter_weather/domain/usecases/clear_history_usecase.dart';
 import 'package:flutter_weather/domain/usecases/fetch_city_use_case.dart';
-import 'package:flutter_weather/domain/usecases/fetch_location_use_case.dart';
-import 'package:flutter_weather/domain/usecases/fetch_weather_use_case.dart';
-import 'package:flutter_weather/domain/usecases/search_city_use_case.dart';
+import 'package:flutter_weather/domain/usecases/fetch_history_usecase.dart';
+import 'package:flutter_weather/domain/usecases/fetch_location_usecase.dart';
+import 'package:flutter_weather/domain/usecases/fetch_weather_usecase.dart';
+import 'package:flutter_weather/domain/usecases/save_city_usecase.dart';
+import 'package:flutter_weather/domain/usecases/search_city_usecase.dart';
 import 'package:flutter_weather/presentation/controllers/city_controller.dart';
 import 'package:flutter_weather/presentation/controllers/onboarding_controller.dart';
 import 'package:flutter_weather/presentation/controllers/weather_controller.dart';
@@ -42,14 +45,29 @@ class InitialBinding extends Bindings {
     Get.lazyPut<SearchCityUseCase>(
         () => SearchCityUseCase(Get.find<CityRepository>()),
         fenix: true);
+    Get.lazyPut<SaveCityUseCase>(
+        () => SaveCityUseCase(Get.find<CityRepository>()),
+        fenix: true);
+    Get.lazyPut<ClearHistoryUseCase>(
+        () => ClearHistoryUseCase(Get.find<CityRepository>()),
+        fenix: true);
+    Get.lazyPut<FetchHistoryUsecase>(
+        () => FetchHistoryUsecase(Get.find<CityRepository>()),
+        fenix: true);
+
     // Controllers
     Get.lazyPut<WeatherController>(
-        () => WeatherController(Get.find<FetchLocationUseCase>(),
-            Get.find<FetchCityUseCase>(), Get.find<FetchWeatherUseCase>()),
+        () => WeatherController(
+            Get.find<FetchLocationUseCase>(),
+            Get.find<FetchCityUseCase>(),
+            Get.find<FetchWeatherUseCase>(),
+            Get.find<SaveCityUseCase>()),
         fenix: true);
     Get.lazyPut<CityController>(
         () => CityController(
               Get.find<SearchCityUseCase>(),
+              Get.find<ClearHistoryUseCase>(),
+              Get.find<FetchHistoryUsecase>(),
             ),
         fenix: true);
   }

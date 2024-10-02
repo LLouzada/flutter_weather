@@ -11,4 +11,8 @@ class FetchCityUseCase extends ParamUseCase<CityModel, LocationModel> {
   Future<CityModel> execute(LocationModel params) {
     return _repository.fetchCityFromLocation(params);
   }
+
+  Future<void> saveCity(CityModel city, LocationModel location) async {
+    return await _repository.saveCity(city, location);
+  }
 }

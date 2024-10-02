@@ -63,8 +63,7 @@ class _MainPopupMenuButton extends StatelessWidget {
                 Get.toNamed(AppRoutes.search.path);
                 break;
               case 2:
-
-              //todo - mais opções
+                Get.toNamed(AppRoutes.history.path);
             }
           },
           itemBuilder: (context) => [
@@ -92,9 +91,9 @@ class _MainPopupMenuButton extends StatelessWidget {
               value: 2,
               child: Row(
                 children: [
-                  Icon(Icons.settings),
+                  Icon(Icons.history),
                   SizedBox(width: 8),
-                  Text('Configurações'),
+                  Text('Historico de buscas'),
                 ],
               ),
             ),
