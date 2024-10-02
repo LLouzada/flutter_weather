@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_weather/data/models/location_model.dart';
 import 'package:flutter_weather/presentation/controllers/city_controller.dart';
+import 'package:flutter_weather/presentation/controllers/weather_controller.dart';
 import 'package:get/get.dart';
 
 class HistoryPage extends StatelessWidget {
@@ -7,6 +9,7 @@ class HistoryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final WeatherController weatherController = Get.find<WeatherController>();
     final CityController cityController = Get.find<CityController>();
     cityController.fetchHistory();
 
@@ -31,8 +34,10 @@ class HistoryPage extends StatelessWidget {
             return ListTile(
               title: Text(city.name),
               subtitle: Text('Estado: ${city.state}, País: ${city.country}'),
-              onTap: () {
-                //todo Implementar ação ao clicar em uma cidade salva no histórico
+              onTap: () async {
+                await weatherController.getWeatherByCitySearch(LocationModel(
+                    latitude: city.latitude ?? 0.0,
+                    longitude: city.longitude ?? 0.0));
               },
             );
           },
