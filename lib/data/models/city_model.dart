@@ -9,7 +9,11 @@ class CityModel with AppLogger {
 
   factory CityModel.fromJson(Map<String, dynamic> json) {
     return CityModel(
-      name: json['city'] ?? json['town'] ?? 'Erro ao buscar o nome da cidade',
+      name: json['city'] ??
+          json['town'] ??
+          json['county'] ??
+          json['province'] ??
+          '',
       state: '${' - ' + json['state']}, ',
       country: json['country_code']?.toUpperCase() ?? '',
     );
