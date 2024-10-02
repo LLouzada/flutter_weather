@@ -16,6 +16,11 @@ class SearchCityPage extends StatelessWidget {
     final WeatherController weatherController = Get.find<WeatherController>();
     Timer? debounce;
 
+    final List<Color> backgroundColors = [
+      Theme.of(Get.context!).colorScheme.primaryContainer,
+      Theme.of(Get.context!).colorScheme.surface,
+    ];
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Pesquisar Cidade'),
@@ -61,7 +66,12 @@ class SearchCityPage extends StatelessWidget {
                   itemCount: cityController.cities.length,
                   itemBuilder: (context, index) {
                     final city = cityController.cities[index];
+
+                    final backgroundColor =
+                        backgroundColors[index % backgroundColors.length];
+
                     return ListTile(
+                      tileColor: backgroundColor,
                       title: Text(city.name),
                       subtitle: Text(
                           'Latitude: ${city.latitude.substring(0, 9)}, Longitude: ${city.longitude.substring(0, 9)}'),
@@ -71,7 +81,6 @@ class SearchCityPage extends StatelessWidget {
                                 latitude: double.tryParse(city.latitude) ?? 0.0,
                                 longitude:
                                     double.tryParse(city.longitude) ?? 0.0));
-                        // Get.back();
                       },
                     );
                   },
