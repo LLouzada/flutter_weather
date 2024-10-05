@@ -30,49 +30,59 @@ class PermissionPage extends StatelessWidget {
           style: TextStyle(color: Theme.of(Get.context!).colorScheme.onPrimary),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Image.asset('assets/images/location.png'),
-            SizedBox(height: sizedBoxHeight),
-            Text(
-              'Usamos sua localização para fornecer previsões de clima mais precisas.',
-              textAlign: TextAlign.center,
-              style: Theme.of(Get.context!).textTheme.titleLarge,
-            ),
-            SizedBox(height: sizedBoxHeight),
-            SizedBox(
-              width: 300,
-              height: 50,
-              child: FilledButton(
-                onPressed: () async {
-                  permissionController.handleLocastionPermission();
-                },
-                child: Text(
-                  'Solicitar Permissão',
-                  style: Theme.of(Get.context!).textTheme.titleLarge?.copyWith(
-                      color: Theme.of(Get.context!).colorScheme.onPrimary),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Image.asset('assets/images/location.png'),
+              SizedBox(height: sizedBoxHeight),
+              Text(
+                'Usamos sua localização para fornecer previsões de clima mais precisas.',
+                textAlign: TextAlign.center,
+                style: Theme.of(Get.context!).textTheme.titleLarge,
+              ),
+              SizedBox(height: sizedBoxHeight),
+              SizedBox(
+                width: 300,
+                height: 50,
+                child: FilledButton(
+                  onPressed: () async {
+                    permissionController.handleLocastionPermission();
+                  },
+                  child: Text(
+                    'Solicitar Permissão',
+                    style: Theme.of(Get.context!)
+                        .textTheme
+                        .titleLarge
+                        ?.copyWith(
+                            color:
+                                Theme.of(Get.context!).colorScheme.onPrimary),
+                  ),
                 ),
               ),
-            ),
-            SizedBox(height: sizedBoxHeight),
-            SizedBox(
-              width: 300,
-              height: 50,
-              child: TextButton(
-                onPressed: () async {
-                  Get.offAllNamed(AppRoutes.home.path);
-                },
-                child: Text(
-                  'Pular por agora',
-                  style: Theme.of(Get.context!).textTheme.titleLarge?.copyWith(
-                      color: Theme.of(Get.context!).colorScheme.onSurface),
+              SizedBox(height: sizedBoxHeight),
+              SizedBox(
+                width: 300,
+                height: 50,
+                child: TextButton(
+                  onPressed: () async {
+                    Get.offAllNamed(AppRoutes.home.path);
+                  },
+                  child: Text(
+                    'Pular por agora',
+                    style: Theme.of(Get.context!)
+                        .textTheme
+                        .titleLarge
+                        ?.copyWith(
+                            color:
+                                Theme.of(Get.context!).colorScheme.onSurface),
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
