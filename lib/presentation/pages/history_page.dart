@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_weather/data/models/location_model.dart';
-import 'package:flutter_weather/presentation/controllers/city_controller.dart';
+import 'package:flutter_weather/features/feature_location/data/models/location_model.dart';
+import 'package:flutter_weather/features/feature_city/presentation/views/city_controller.dart';
 import 'package:flutter_weather/presentation/controllers/weather_controller.dart';
 import 'package:get/get.dart';
 

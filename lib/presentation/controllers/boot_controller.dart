@@ -1,7 +1,7 @@
-import 'package:flutter_weather/app/config/app_constants.dart';
-import 'package:flutter_weather/app/config/app_routes.dart';
-import 'package:flutter_weather/app/services/local_storage.dart';
-import 'package:flutter_weather/app/util/app_logger.dart';
+import 'package:flutter_weather/core/config/app_constants.dart';
+import 'package:flutter_weather/core/config/app_routes.dart';
+import 'package:flutter_weather/core/services/local_storage.dart';
+import 'package:flutter_weather/core/utils/app_logger.dart';
 import 'package:flutter_weather/presentation/controllers/permission_controller.dart';
 import 'package:get/get.dart';
 
@@ -54,7 +54,7 @@ class BootController extends GetxController with AppLogger {
   // Função para verificar permissão de localização
   Future<bool> _checkLocationPermission() async {
     final bool hasLocationPermission =
-        await Get.find<PermissionController>().hasLocationPermission();
+        await Get.find<LocationPermissionController>().hasLocationPermission();
     logD('hasLocationPermission: $hasLocationPermission');
     return hasLocationPermission;
   }

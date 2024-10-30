@@ -1,13 +1,13 @@
-import 'package:flutter_weather/app/config/app_routes.dart';
-import 'package:flutter_weather/app/core/usecases/save_city_params.dart';
-import 'package:flutter_weather/app/util/app_logger.dart';
-import 'package:flutter_weather/data/models/city_model.dart';
-import 'package:flutter_weather/data/models/location_model.dart';
-import 'package:flutter_weather/data/models/weather_model.dart';
-import 'package:flutter_weather/domain/usecases/fetch_city_use_case.dart';
-import 'package:flutter_weather/domain/usecases/fetch_location_usecase.dart';
-import 'package:flutter_weather/domain/usecases/fetch_weather_usecase.dart';
-import 'package:flutter_weather/domain/usecases/save_city_usecase.dart';
+import 'package:flutter_weather/core/config/app_routes.dart';
+import 'package:flutter_weather/core/core/usecases/save_city_params.dart';
+import 'package:flutter_weather/core/utils/app_logger.dart';
+import 'package:flutter_weather/features/feature_city/data/models/city_model.dart';
+import 'package:flutter_weather/features/feature_location/data/models/location_model.dart';
+import 'package:flutter_weather/features/feature_weather/data/models/weather_model.dart';
+import 'package:flutter_weather/features/feature_city/domain/usecases/fetch_city_use_case.dart';
+import 'package:flutter_weather/features/feature_location/domain/usecases/fetch_location_usecase.dart';
+import 'package:flutter_weather/features/feature_weather/domain/usecases/fetch_weather_usecase.dart';
+import 'package:flutter_weather/features/feature_city/domain/usecases/save_city_usecase.dart';
 import 'package:get/get.dart';
 
 class WeatherController extends GetxController with AppLogger {

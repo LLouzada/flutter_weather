@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:flutter_weather/app/util/dependency_injector.dart';
+import 'package:flutter_weather/core/utils/dependency_injector.dart';
 import 'package:flutter_weather/presentation/app.dart';
 import 'package:flutter_weather/presentation/controllers/theme_controller.dart';
 import 'package:get/get.dart';

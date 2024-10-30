@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_weather/app/config/app_routes.dart';
-import 'package:flutter_weather/app/util/app_logger.dart';
+import 'package:flutter_weather/core/config/app_routes.dart';
+import 'package:flutter_weather/core/utils/app_logger.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-class PermissionController extends GetxController with AppLogger {
+class LocationPermissionController extends GetxController with AppLogger {
   Future<bool> hasLocationServiceEnabled() async {
     return await Permission.location.serviceStatus.isEnabled;
   }

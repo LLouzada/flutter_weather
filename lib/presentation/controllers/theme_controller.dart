@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_weather/app/config/app_constants.dart';
-import 'package:flutter_weather/app/services/local_storage.dart';
-import 'package:flutter_weather/app/util/app_logger.dart';
+import 'package:flutter_weather/core/config/app_constants.dart';
+import 'package:flutter_weather/core/services/local_storage.dart';
+import 'package:flutter_weather/core/utils/app_logger.dart';
 import 'package:get/get.dart';
 import 'package:json_theme_plus/json_theme_plus.dart';
 
