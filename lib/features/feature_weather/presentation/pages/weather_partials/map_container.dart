@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:flutter_weather/presentation/controllers/weather_controller.dart';
+import 'package:flutter_weather/features/feature_weather/presentation/controllers/weather_controller.dart';
 import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
 

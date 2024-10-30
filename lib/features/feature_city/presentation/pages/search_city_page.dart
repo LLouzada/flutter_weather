@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_weather/features/feature_location/data/models/location_model.dart';
-import 'package:flutter_weather/features/feature_city/presentation/views/city_controller.dart';
-import 'package:flutter_weather/presentation/controllers/weather_controller.dart';
-import 'package:flutter_weather/presentation/widgets/app_loader.dart';
+import 'package:flutter_weather/features/feature_city/presentation/controllers/city_controller.dart';
+import 'package:flutter_weather/features/feature_weather/presentation/controllers/weather_controller.dart';
+import 'package:flutter_weather/core/shared/widgets/app_loader.dart';
 import 'package:get/get.dart';
 
 /// A page to search for a city

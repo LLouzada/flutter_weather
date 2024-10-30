@@ -11,9 +11,9 @@ import 'package:flutter_weather/features/feature_location/domain/usecases/fetch_
 import 'package:flutter_weather/features/feature_weather/domain/usecases/fetch_weather_usecase.dart';
 import 'package:flutter_weather/features/feature_city/domain/usecases/save_city_usecase.dart';
 import 'package:flutter_weather/features/feature_city/domain/usecases/search_city_usecase.dart';
-import 'package:flutter_weather/features/feature_city/presentation/views/city_controller.dart';
+import 'package:flutter_weather/features/feature_city/presentation/controllers/city_controller.dart';
 import 'package:flutter_weather/features/feature_onboarding/presentation/controllers/onboarding_controller.dart';
-import 'package:flutter_weather/presentation/controllers/weather_controller.dart';
+import 'package:flutter_weather/features/feature_weather/presentation/controllers/weather_controller.dart';
 import 'package:get/get.dart';
 
 /// Binds the dependencies for the initial setup of the application.

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_weather/core/utils/get_weather_icon.dart';
-import 'package:flutter_weather/presentation/controllers/weather_controller.dart';
-import 'package:flutter_weather/presentation/widgets/app_loader.dart';
+import 'package:flutter_weather/features/feature_weather/presentation/controllers/weather_controller.dart';
+import 'package:flutter_weather/core/shared/widgets/app_loader.dart';
 import 'package:get/get.dart';
 
 ///  A container to show the forecast weather

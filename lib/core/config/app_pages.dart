@@ -1,8 +1,8 @@
 import 'package:flutter_weather/core/config/app_routes.dart';
-import 'package:flutter_weather/presentation/pages/history_page.dart';
-import 'package:flutter_weather/presentation/pages/search_city_page.dart';
-import 'package:flutter_weather/presentation/pages/weather_page.dart';
-import 'package:flutter_weather/presentation/pages/onboarding_page.dart';
+import 'package:flutter_weather/features/feature_city/presentation/pages/city_history_page.dart';
+import 'package:flutter_weather/features/feature_city/presentation/pages/search_city_page.dart';
+import 'package:flutter_weather/features/feature_weather/presentation/pages/weather_page.dart';
+import 'package:flutter_weather/features/feature_onboarding/presentation/pages/onboarding_page.dart';
 import 'package:flutter_weather/features/feature_location/presentation/pages/location_permission_page.dart';
 import 'package:get/get.dart';
 
@@ -20,8 +20,8 @@ class AppPages {
   static GetPage search =
       GetPage(name: AppRoutes.search.path, page: () => const SearchCityPage());
 
-  static GetPage history =
-      GetPage(name: AppRoutes.history.path, page: () => const HistoryPage());
+  static GetPage history = GetPage(
+      name: AppRoutes.history.path, page: () => const CityHistoryPage());
 
   static GetPage settings =
       GetPage(name: AppRoutes.settings.path, page: () => const WeatherPage());

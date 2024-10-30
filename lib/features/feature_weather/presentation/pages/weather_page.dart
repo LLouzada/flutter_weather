@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_weather/core/config/app_constants.dart';
 import 'package:flutter_weather/core/config/app_routes.dart';
-import 'package:flutter_weather/presentation/controllers/theme_controller.dart';
-import 'package:flutter_weather/presentation/controllers/weather_controller.dart';
+import 'package:flutter_weather/core/controllers/theme_controller.dart';
+import 'package:flutter_weather/features/feature_weather/presentation/controllers/weather_controller.dart';
 import 'package:flutter_weather/features/feature_weather/presentation/pages/weather_partials/forecast_container.dart';
 import 'package:flutter_weather/features/feature_weather/presentation/pages/weather_partials/map_container.dart';
 import 'package:flutter_weather/features/feature_weather/presentation/pages/weather_partials/today_weather_conteiner.dart';

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_weather/features/feature_location/data/models/location_model.dart';
-import 'package:flutter_weather/features/feature_city/presentation/views/city_controller.dart';
-import 'package:flutter_weather/presentation/controllers/weather_controller.dart';
+import 'package:flutter_weather/features/feature_city/presentation/controllers/city_controller.dart';
+import 'package:flutter_weather/features/feature_weather/presentation/controllers/weather_controller.dart';
 import 'package:get/get.dart';
 
 ///  A page to show the history of searches
-class HistoryPage extends StatelessWidget {
-  const HistoryPage({super.key});
+class CityHistoryPage extends StatelessWidget {
+  const CityHistoryPage({super.key});
 
   @override
   Widget build(BuildContext context) {

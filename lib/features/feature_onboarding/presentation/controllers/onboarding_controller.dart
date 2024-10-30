@@ -1,7 +1,7 @@
 import 'package:flutter_weather/core/config/app_constants.dart';
 import 'package:flutter_weather/core/config/app_routes.dart';
 import 'package:flutter_weather/core/services/local_storage.dart';
-import 'package:flutter_weather/presentation/controllers/permission_controller.dart';
+import 'package:flutter_weather/features/feature_location/presentation/controllers/location_permission_controller.dart';
 import 'package:get/get.dart';
 
 class OnboardingController extends GetxController {

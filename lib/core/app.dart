@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_weather/core/config/app_constants.dart';
 import 'package:flutter_weather/core/config/app_pages.dart';
 import 'package:flutter_weather/core/bindings/initial_binding.dart';
-import 'package:flutter_weather/presentation/controllers/boot_controller.dart';
-import 'package:flutter_weather/presentation/controllers/theme_controller.dart';
+import 'package:flutter_weather/core/controllers/boot_controller.dart';
+import 'package:flutter_weather/core/controllers/theme_controller.dart';
 import 'package:get/get.dart';
 
 /// The main app class

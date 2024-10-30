@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_weather/core/utils/app_logger.dart';
 import 'package:flutter_weather/features/feature_location/data/models/location_model.dart';
 import 'package:flutter_weather/features/feature_location/domain/repositories/location_repository.dart';
-import 'package:flutter_weather/presentation/controllers/permission_controller.dart';
+import 'package:flutter_weather/features/feature_location/presentation/controllers/location_permission_controller.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 

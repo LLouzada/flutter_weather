@@ -1,7 +1,7 @@
 import 'package:flutter_weather/core/services/local_storage.dart';
-import 'package:flutter_weather/presentation/controllers/boot_controller.dart';
-import 'package:flutter_weather/presentation/controllers/permission_controller.dart';
-import 'package:flutter_weather/presentation/controllers/theme_controller.dart';
+import 'package:flutter_weather/core/controllers/boot_controller.dart';
+import 'package:flutter_weather/features/feature_location/presentation/controllers/location_permission_controller.dart';
+import 'package:flutter_weather/core/controllers/theme_controller.dart';
 import 'package:get/get.dart';
 
 /// Initializes the dependency injection for the application.

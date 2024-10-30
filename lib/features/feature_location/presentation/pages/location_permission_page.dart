@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_weather/core/config/app_routes.dart';
-import 'package:flutter_weather/presentation/controllers/permission_controller.dart';
+import 'package:flutter_weather/features/feature_location/presentation/controllers/location_permission_controller.dart';
 import 'package:get/get.dart';
 
 ///  A page to request the user's location permission
